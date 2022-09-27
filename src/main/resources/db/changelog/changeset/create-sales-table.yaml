@@ -1,0 +1,103 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-sales-table
+      author: Dmitriy Erin
+      changes:
+        - createTable:
+            tableName: sales
+            columns:
+              - column:
+                  name: sale_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: sale_date
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: partner_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: partner_id_end_user
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: software_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: key_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: flash_number
+                  type: bigint
+              - column:
+                  name: license_cashless
+                  type: bigint
+              - column:
+                  name: license_discount
+                  type: int
+              - column:
+                  name: license_report
+                  type: int
+              - column:
+                  name: license_cabinet
+                  type: int
+              - column:
+                  name: license_paktan
+                  type: int
+              - column:
+                  name: key_group_id
+                  type: bigint
+              - column:
+                  name: is_return
+                  type: boolean
+              - column:
+                  name: order_number
+                  type: int
+              - column:
+                  name: bill_number
+                  type: int
+              - column:
+                  name: sale_comment
+                  type: varchar(250)
+        - addForeignKeyConstraint:
+            baseTableName: sales
+            baseColumnNames: partner_id
+            referencedTableName: partners
+            referencedColumnNames: partner_id
+            constraintName: sales_partner_id_partner_id_fk
+        - addForeignKeyConstraint:
+            baseTableName: sales
+            baseColumnNames: partner_id_end_user
+            referencedTableName: partners
+            referencedColumnNames: partner_id
+            constraintName: sales_partner_id_end_user_partner_id_fk
+        - addForeignKeyConstraint:
+            baseTableName: sales
+            baseColumnNames: software_id
+            referencedTableName: software
+            referencedColumnNames: software_id
+            constraintName: sales_software_id_software_id_fk
+        - addForeignKeyConstraint:
+            baseTableName: sales
+            baseColumnNames: key_id
+            referencedTableName: keys
+            referencedColumnNames: key_id
+            constraintName: sales_key_id_key_id_fk
+        - addForeignKeyConstraint:
+            baseTableName: sales
+            baseColumnNames: key_group_id
+            referencedTableName: keys_groups
+            referencedColumnNames: keys_group_id
+            constraintName: sales_key_group_id_key_group_id_fk

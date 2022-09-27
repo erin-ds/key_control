@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-partners-table
+      author: Dmitriy Erin
+      changes:
+        - createTable:
+            tableName: partners
+            columns:
+              - column:
+                  name: partner_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: partner_name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: partner_city
+                  type: varchar(100)
+              - column:
+                  name: partner_comment
+                  type: varchar(250)
+

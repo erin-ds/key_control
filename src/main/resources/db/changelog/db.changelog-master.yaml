@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changeset/create-key-types-table.yaml
+  - include:
+      file: db/changelog/changeset/create-keys-table.yaml
+  - include:
+      file: db/changelog/changeset/create-keys_groups-table.yaml
+  - include:
+      file: db/changelog/changeset/create-partners-table.yaml
+  - include:
+      file: db/changelog/changeset/create-returns-table.yaml
+  - include:
+      file: db/changelog/changeset/create-sales-table.yaml
+  - include:
+      file: db/changelog/changeset/create-software-table.yaml

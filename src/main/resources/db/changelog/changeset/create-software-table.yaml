@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-software-table
+      author: Dmitriy Erin
+      changes:
+        - createTable:
+            tableName: software
+            columns:
+              - column:
+                  name: software_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: software_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: software_comment
+                  type: varchar(250)

@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-key-types-table
+      author: Dmitriy Erin
+      changes:
+        - createTable:
+            tableName: key_types
+            columns:
+              - column:
+                  name: key_type_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: key_type_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: key_type_comment
+                  type: varchar(250)
+
+

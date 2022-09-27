@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-keys-table
+      author: Dmitriy Erin
+      changes:
+        - createTable:
+            tableName: keys
+            columns:
+              - column:
+                  name: key_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: key_type_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: key_number_hex
+                  type: varchar(8)
+              - column:
+                  name: key_number_dec
+                  type: bigint
+              - column:
+                  name: key_comment
+                  type: varchar(250)
+        - addForeignKeyConstraint:
+            baseTableName: keys
+            baseColumnNames: key_type_id
+            referencedTableName: key_types
+            referencedColumnNames: key_type_id
+            constraintName: keys_key_type_fk
+
