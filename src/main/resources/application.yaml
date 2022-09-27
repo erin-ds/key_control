@@ -1,0 +1,23 @@
+server:
+  port: 15411
+spring:
+  application:
+    name: key-control
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.10.243:5432/topazkeys
+    username: postgres
+    password: office
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        show_sql: false
+        ddl-auto: none
+        temp:
+          use_jdbc_metadata_defaults: false
+liquibase:
+  enable: true
+springdoc:
+  swagger-ui:
+    enabled: true
