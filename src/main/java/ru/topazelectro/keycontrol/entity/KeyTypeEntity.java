@@ -9,7 +9,6 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 @Entity
 @Table(name = "key_types")
@@ -22,11 +21,11 @@ public class KeyTypeEntity {
 
     @Column(name = "name")
     private String name;
+
     @Column(name = "comment")
     private String comment;
 
     @OneToMany(mappedBy = "id", orphanRemoval = true)
-    @ToString.Exclude
     private List<KeyEntity> keyEntities;
 
     @Override

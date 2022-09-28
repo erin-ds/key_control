@@ -9,10 +9,9 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "keys_groups")
+@Table(name = "key_groups")
 public class KeyGroupEntity {
 
     @Id
@@ -22,6 +21,7 @@ public class KeyGroupEntity {
 
     @Column(name = "number")
     private Long number;
+
     @OneToOne(optional = false)
     @JoinColumn(name = "partner_id", referencedColumnName = "id", insertable = false, updatable = false)
     private PartnerEntity partnerId;

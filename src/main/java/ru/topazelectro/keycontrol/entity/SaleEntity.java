@@ -10,7 +10,6 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 @Table(name = "sales")
 public class SaleEntity {
@@ -25,17 +24,14 @@ public class SaleEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "partner_id", referencedColumnName = "id", insertable = false,updatable = false)
-    @ToString.Exclude
     private PartnerEntity partnerId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "partner_id_end_user", referencedColumnName = "id", insertable = false,updatable = false)
-    @ToString.Exclude
     private PartnerEntity partnerIdEndUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "software_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @ToString.Exclude
     private SoftwareEntity softwareId;
 
     @OneToOne
@@ -60,8 +56,9 @@ public class SaleEntity {
     @Column(name = "license_paktan")
     private int licensePaktan;
 
-    @Column(name = "key_group_id")
-    private Long keyGroupId;
+    @OneToOne(optional = false)
+    @JoinColumn(name = "key_group_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private KeyGroupEntity keyGroupId;
 
     @Column(name = "is_return")
     private boolean isReturn;
@@ -72,7 +69,7 @@ public class SaleEntity {
     @Column(name = "bill_number")
     private int billNumber;
 
-    @Column(name = "sale_comment")
+    @Column(name = "comment")
     private String comment;
 
     @Override

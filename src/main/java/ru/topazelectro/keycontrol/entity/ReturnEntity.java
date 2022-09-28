@@ -10,7 +10,6 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 @Table(name = "returns")
 public class ReturnEntity {

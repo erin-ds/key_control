@@ -9,7 +9,6 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 @Table(name = "software")
 public class SoftwareEntity {

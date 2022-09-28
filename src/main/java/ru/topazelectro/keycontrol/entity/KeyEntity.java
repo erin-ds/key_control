@@ -8,7 +8,6 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 @Entity
 @Table(name = "keys")
@@ -21,7 +20,6 @@ public class KeyEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @ToString.Exclude
     private KeyTypeEntity typeId;
 
     @Column(name = "number_hex")

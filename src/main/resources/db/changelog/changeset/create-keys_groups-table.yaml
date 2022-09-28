@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: create-keys_groups-table
+      id: create-key_groups-table
       author: Dmitriy Erin
       changes:
         - createTable:
-            tableName: keys_groups
+            tableName: key_groups
             columns:
               - column:
                   name: id
