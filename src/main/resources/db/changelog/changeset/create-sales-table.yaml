@@ -40,10 +40,10 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: flash_number
-                  type: bigint
+                  type: int
               - column:
                   name: license_cashless
-                  type: bigint
+                  type: int
               - column:
                   name: license_discount
                   type: int
