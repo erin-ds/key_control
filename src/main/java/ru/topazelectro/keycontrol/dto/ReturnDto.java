@@ -2,6 +2,14 @@ package ru.topazelectro.keycontrol.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 @Data
-public class ReturnDto {
+public class ReturnDto implements Serializable {
+
+    private SaleDto saleId;
+    private LocalDateTime datePlan;
+    private LocalDateTime dateFact;
+    private String comment;
 }
