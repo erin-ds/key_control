@@ -7,30 +7,30 @@ databaseChangeLog:
             tableName: returns
             columns:
               - column:
-                  name: return_id
+                  name: id
                   type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: return_sale_id
+                  name: sale_id
                   type: bigint
                   constraints:
                     nullable: false
               - column:
-                  name: return_date_plan
+                  name: date_plan
                   type: datetime
               - column:
-                  name: return_date_fact
+                  name: date_fact
                   type: datetime
               - column:
-                  name: return_comment
+                  name: comment
                   type: varchar(250)
         - addForeignKeyConstraint:
             baseTableName: returns
             baseColumnNames: return_sale_id
             referencedTableName: sales
-            referencedColumnNames: sale_id
+            referencedColumnNames: id
             constraintName: return_sale_id_sale_id_fk
 

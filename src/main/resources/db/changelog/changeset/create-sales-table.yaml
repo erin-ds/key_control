@@ -7,14 +7,14 @@ databaseChangeLog:
             tableName: sales
             columns:
               - column:
-                  name: sale_id
+                  name: id
                   type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: sale_date
+                  name: date
                   type: datetime
                   constraints:
                     nullable: false
@@ -69,35 +69,35 @@ databaseChangeLog:
                   name: bill_number
                   type: int
               - column:
-                  name: sale_comment
+                  name: comment
                   type: varchar(250)
         - addForeignKeyConstraint:
             baseTableName: sales
             baseColumnNames: partner_id
             referencedTableName: partners
-            referencedColumnNames: partner_id
+            referencedColumnNames: id
             constraintName: sales_partner_id_partner_id_fk
         - addForeignKeyConstraint:
             baseTableName: sales
             baseColumnNames: partner_id_end_user
             referencedTableName: partners
-            referencedColumnNames: partner_id
+            referencedColumnNames: id
             constraintName: sales_partner_id_end_user_partner_id_fk
         - addForeignKeyConstraint:
             baseTableName: sales
             baseColumnNames: software_id
             referencedTableName: software
-            referencedColumnNames: software_id
+            referencedColumnNames: id
             constraintName: sales_software_id_software_id_fk
         - addForeignKeyConstraint:
             baseTableName: sales
             baseColumnNames: key_id
             referencedTableName: keys
-            referencedColumnNames: key_id
+            referencedColumnNames: id
             constraintName: sales_key_id_key_id_fk
         - addForeignKeyConstraint:
             baseTableName: sales
             baseColumnNames: key_group_id
             referencedTableName: keys_groups
-            referencedColumnNames: keys_group_id
+            referencedColumnNames: id
             constraintName: sales_key_group_id_key_group_id_fk

@@ -7,19 +7,19 @@ databaseChangeLog:
             tableName: key_types
             columns:
               - column:
-                  name: key_type_id
+                  name: id
                   type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: key_type_name
+                  name: name
                   type: varchar(50)
                   constraints:
                     nullable: false
               - column:
-                  name: key_type_comment
+                  name: comment
                   type: varchar(250)
 
 

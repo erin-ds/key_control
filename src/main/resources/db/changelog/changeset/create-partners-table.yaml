@@ -7,21 +7,21 @@ databaseChangeLog:
             tableName: partners
             columns:
               - column:
-                  name: partner_id
+                  name: id
                   type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: partner_name
+                  name: name
                   type: varchar(100)
                   constraints:
                     nullable: false
               - column:
-                  name: partner_city
+                  name: city
                   type: varchar(100)
               - column:
-                  name: partner_comment
+                  name: comment
                   type: varchar(250)
 

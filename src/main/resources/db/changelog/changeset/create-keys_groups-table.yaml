@@ -7,27 +7,27 @@ databaseChangeLog:
             tableName: keys_groups
             columns:
               - column:
-                  name: keys_group_id
+                  name: id
                   type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: keys_group_number
+                  name: number
                   type: bigint
                   constraints:
                     nullable: false
               - column:
-                  name: keys_group_partner_id
+                  name: partner_id
                   type: bigint
               - column:
-                  name: keys_group_comment
+                  name: comment
                   type: varchar(250)
         - addForeignKeyConstraint:
             baseTableName: keys_groups
             baseColumnNames: keys_group_partner_id
             referencedTableName: partners
-            referencedColumnNames: partner_id
+            referencedColumnNames: id
             constraintName: keys_groups_partner_id_fk
 
