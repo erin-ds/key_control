@@ -10,6 +10,7 @@ import java.io.Serializable;
 @Data
 public class SoftwareDto implements Serializable {
 
+    private Long id;
     private final String name;
     private final String comment;
 }
