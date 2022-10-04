@@ -11,18 +11,10 @@ import java.util.Objects;
 @Setter
 @RequiredArgsConstructor
 @Table(name = "software")
-public class SoftwareEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+public class SoftwareEntity extends CommonEntity{
 
     @Column(name = "name")
     private String name;
-
-    @Column(name = "comment")
-    private String comment;
 
     @Override
     public boolean equals(Object o) {

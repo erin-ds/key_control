@@ -1,6 +1,7 @@
 package ru.topazelectro.keycontrol.service.mapping;
 
 import ru.topazelectro.keycontrol.dto.PartnerDto;
+import ru.topazelectro.keycontrol.entity.CommonEntity;
 import ru.topazelectro.keycontrol.entity.PartnerEntity;
 
 public class PartnerMappingService implements MappingService<PartnerDto, PartnerEntity> {

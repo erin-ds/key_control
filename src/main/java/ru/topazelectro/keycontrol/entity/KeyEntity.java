@@ -11,12 +11,8 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "keys")
-public class KeyEntity {
+public class KeyEntity extends CommonEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id", referencedColumnName = "id", insertable = false, updatable = false)
@@ -26,8 +22,6 @@ public class KeyEntity {
     private String numberHex;
     @Column(name = "number_dec")
     private Long numberDec;
-    @Column(name = "comment")
-    private String comment;
 
     @Override
     public boolean equals(Object o) {

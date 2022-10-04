@@ -13,9 +13,8 @@ import java.time.LocalDateTime;
  * A DTO for the {@link ru.topazelectro.keycontrol.entity.SaleEntity} entity
  */
 @Data
-public class SaleDto implements Serializable {
+public class SaleDto extends CommonDto {
 
-    private Long id;
     private final Long date;
     private final Long partnerId;
     private final Long partnerIdEndUser;
@@ -31,5 +30,4 @@ public class SaleDto implements Serializable {
     private final boolean isReturn;
     private final int orderNumber;
     private final int billNumber;
-    private final String comment;
 }

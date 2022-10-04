@@ -5,11 +5,9 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class KeyDto implements Serializable {
+public class KeyDto extends CommonDto {
 
-    private Long id;
     private KeyTypeDto typeId;
     private String numberHex;
     private Long numberDec;
-    private String comment;
 }

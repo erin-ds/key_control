@@ -12,18 +12,11 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "key_types")
-public class KeyTypeEntity {
+public class KeyTypeEntity extends CommonEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
 
     @Column(name = "name")
     private String name;
-
-    @Column(name = "comment")
-    private String comment;
 
     @OneToMany(mappedBy = "id", orphanRemoval = true)
     private List<KeyEntity> keyEntities;

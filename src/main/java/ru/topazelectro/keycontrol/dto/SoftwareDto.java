@@ -8,9 +8,7 @@ import java.io.Serializable;
  * A DTO for the {@link ru.topazelectro.keycontrol.entity.SoftwareEntity} entity
  */
 @Data
-public class SoftwareDto implements Serializable {
+public class SoftwareDto extends CommonDto {
 
-    private Long id;
     private final String name;
-    private final String comment;
 }

@@ -12,12 +12,8 @@ import java.util.Objects;
 @Setter
 @RequiredArgsConstructor
 @Table(name = "returns")
-public class ReturnEntity {
+public class ReturnEntity extends CommonEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
 
     @OneToOne(optional = false)
     @JoinColumn(name="sale_id", referencedColumnName = "id", updatable = false, insertable = false)
@@ -29,8 +25,6 @@ public class ReturnEntity {
     @Column(name = "date_fact")
     private LocalDateTime dateFact;
 
-    @Column(name = "comment")
-    private String comment;
 
     @Override
     public boolean equals(Object o) {

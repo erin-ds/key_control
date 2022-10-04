@@ -6,10 +6,8 @@ import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class KeyTypeDto implements Serializable {
+public class KeyTypeDto extends CommonDto {
 
-    private Long id;
     private String name;
-    private String comment;
     private List<KeyDto> key;
 }

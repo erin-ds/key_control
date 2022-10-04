@@ -12,12 +12,7 @@ import java.util.Objects;
 @Setter
 @RequiredArgsConstructor
 @Table(name = "sales")
-public class SaleEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+public class SaleEntity extends CommonEntity{
 
     @Column(name = "date")
     private LocalDateTime date;
@@ -69,8 +64,6 @@ public class SaleEntity {
     @Column(name = "bill_number")
     private int billNumber;
 
-    @Column(name = "comment")
-    private String comment;
 
     @Override
     public boolean equals(Object o) {

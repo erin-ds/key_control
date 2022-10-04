@@ -12,12 +12,8 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "key_groups")
-public class KeyGroupEntity {
+public class KeyGroupEntity extends CommonEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
 
     @Column(name = "number")
     private Long number;
@@ -26,8 +22,6 @@ public class KeyGroupEntity {
     @JoinColumn(name = "partner_id", referencedColumnName = "id", insertable = false, updatable = false)
     private PartnerEntity partnerId;
 
-    @Column(name = "comment")
-    private String comment;
 
     @Override
     public boolean equals(Object o) {

@@ -7,6 +7,7 @@ public class KeyGroupMappingService implements MappingService<KeyGroupDto, KeyGr
 
     @Override
     public KeyGroupDto toDTO(KeyGroupEntity keyGroupEntity) {
+
         return KeyGroupDto.builder()
                 .number(keyGroupEntity.getNumber())
                 .partnerId(keyGroupEntity.getPartnerId().getId())

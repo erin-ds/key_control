@@ -12,19 +12,12 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "partners")
-public class PartnerEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+public class PartnerEntity extends CommonEntity{
 
     @Column(name = "name")
     private String name;
     @Column(name = "city")
     private String city;
-    @Column(name = "comment")
-    private String comment;
 
     @Override
     public boolean equals(Object o) {
