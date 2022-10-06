@@ -1,5 +1,6 @@
 package ru.topazelectro.keycontrol.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -8,6 +9,7 @@ import java.io.Serializable;
  * A DTO for the {@link ru.topazelectro.keycontrol.entity.SoftwareEntity} entity
  */
 @Data
+@Builder
 public class SoftwareDto extends CommonDto {
 
     private final String name;

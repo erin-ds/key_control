@@ -7,7 +7,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-@Builder(access = AccessLevel.PUBLIC)
+@Builder
 public class KeyGroupDto extends CommonDto {
 
     private Long number;

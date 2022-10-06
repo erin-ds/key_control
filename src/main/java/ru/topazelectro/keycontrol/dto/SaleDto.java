@@ -1,5 +1,6 @@
 package ru.topazelectro.keycontrol.dto;
 
+import lombok.Builder;
 import lombok.Data;
 import ru.topazelectro.keycontrol.entity.KeyEntity;
 import ru.topazelectro.keycontrol.entity.KeyGroupEntity;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
  * A DTO for the {@link ru.topazelectro.keycontrol.entity.SaleEntity} entity
  */
 @Data
+@Builder
 public class SaleDto extends CommonDto {
 
     private final Long date;

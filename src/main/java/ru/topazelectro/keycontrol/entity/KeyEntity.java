@@ -16,7 +16,7 @@ public class KeyEntity extends CommonEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private KeyTypeEntity typeId;
+    private Long typeId;
 
     @Column(name = "number_hex")
     private String numberHex;
