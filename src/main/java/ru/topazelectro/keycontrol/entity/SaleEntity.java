@@ -15,7 +15,7 @@ import java.util.Objects;
 public class SaleEntity extends CommonEntity{
 
     @Column(name = "date")
-    private LocalDateTime date;
+    private Long date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "partner_id", referencedColumnName = "id", insertable = false,updatable = false)
@@ -27,7 +27,7 @@ public class SaleEntity extends CommonEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "software_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private SoftwareEntity softwareId;
+    private Long softwareId;
 
     @OneToOne
     @JoinColumn(name = "key_id", referencedColumnName = "id", insertable = false,updatable = false)
@@ -53,7 +53,7 @@ public class SaleEntity extends CommonEntity{
 
     @OneToOne(optional = false)
     @JoinColumn(name = "key_group_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private KeyGroupEntity keyGroupId;
+    private Long keyGroupId;
 
     @Column(name = "is_return")
     private boolean isReturn;

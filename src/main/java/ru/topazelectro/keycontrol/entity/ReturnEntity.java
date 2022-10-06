@@ -17,7 +17,7 @@ public class ReturnEntity extends CommonEntity{
 
     @OneToOne(optional = false)
     @JoinColumn(name="sale_id", referencedColumnName = "id", updatable = false, insertable = false)
-    private SaleEntity saleId;
+    private Long saleId;
 
     @Column(name = "date_plan")
     private LocalDateTime datePlan;

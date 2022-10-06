@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Builder
 public class ReturnDto extends CommonDto {
 
-    private SaleDto saleId;
+    private Long saleId;
     private LocalDateTime datePlan;
     private LocalDateTime dateFact;
 
