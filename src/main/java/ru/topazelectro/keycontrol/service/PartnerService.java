@@ -1,10 +1,10 @@
-package ru.topazelectro.keycontrol.service.mapping;
+package ru.topazelectro.keycontrol.service;
 
 import ru.topazelectro.keycontrol.dto.PartnerDto;
-import ru.topazelectro.keycontrol.entity.CommonEntity;
 import ru.topazelectro.keycontrol.entity.PartnerEntity;
+import ru.topazelectro.keycontrol.repository.PartnerRepository;
 
-public class PartnerMappingService implements MappingService<PartnerDto, PartnerEntity> {
+public class PartnerService extends CommonService<PartnerEntity, PartnerDto, PartnerRepository> {
     @Override
     public PartnerDto toDTO(PartnerEntity partnerEntity) {
         return null;

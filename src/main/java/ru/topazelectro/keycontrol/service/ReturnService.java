@@ -1,9 +1,10 @@
-package ru.topazelectro.keycontrol.service.mapping;
+package ru.topazelectro.keycontrol.service;
 
 import ru.topazelectro.keycontrol.dto.ReturnDto;
 import ru.topazelectro.keycontrol.entity.ReturnEntity;
+import ru.topazelectro.keycontrol.repository.ReturnRepository;
 
-public class ReturnMappingService implements MappingService<ReturnDto, ReturnEntity> {
+public class ReturnService extends CommonService<ReturnEntity, ReturnDto, ReturnRepository> {
 
     @Override
     public ReturnDto toDTO(ReturnEntity returnEntity) {

@@ -1,9 +1,10 @@
-package ru.topazelectro.keycontrol.service.mapping;
+package ru.topazelectro.keycontrol.service;
 
 import ru.topazelectro.keycontrol.dto.SaleDto;
 import ru.topazelectro.keycontrol.entity.SaleEntity;
+import ru.topazelectro.keycontrol.repository.SaleRepository;
 
-public class SaleMappingService implements MappingService<SaleDto, SaleEntity> {
+public class SaleService extends CommonService<SaleEntity, SaleDto, SaleRepository> {
 
     @Override
     public SaleDto toDTO(SaleEntity saleEntity) {
