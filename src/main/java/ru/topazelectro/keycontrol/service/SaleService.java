@@ -33,7 +33,7 @@ public class SaleService extends CommonService<SaleEntity, SaleDto, SaleReposito
 
     @Override
     public SaleEntity fromDTO(SaleDto saleDto) {
-        SaleEntity entity = findById(saleDto.getId()).orElse(new SaleEntity());
+        SaleEntity entity = findByIdForMapping(saleDto.getId()).orElse(new SaleEntity());
         entity.setDate(saleDto.getDate());
         entity.setPartnerId(saleDto.getPartnerId());
         entity.setPartnerIdEndUser(saleDto.getPartnerIdEndUser());

@@ -3,16 +3,11 @@ package ru.topazelectro.keycontrol.service;
 import org.springframework.stereotype.Service;
 import ru.topazelectro.keycontrol.dto.KeyDto;
 import ru.topazelectro.keycontrol.entity.KeyEntity;
-import ru.topazelectro.keycontrol.entity.KeyGroupEntity;
 import ru.topazelectro.keycontrol.repository.KeyRepository;
-
-import javax.inject.Inject;
 
 @Service
 public class KeyService extends CommonService<KeyEntity, KeyDto, KeyRepository> {
 
-    @Inject
-    KeyRepository repository;
 
     @Override
     public KeyDto toDTO(KeyEntity keyEntity) {
@@ -28,7 +23,7 @@ public class KeyService extends CommonService<KeyEntity, KeyDto, KeyRepository> 
 
     @Override
     public KeyEntity fromDTO(KeyDto keyDto) {
-        KeyEntity entity = repository.findById(keyDto.getId()).orElse(new KeyEntity());
+        KeyEntity entity = findByIdForMapping(keyDto.getId()).orElse(new KeyEntity());
         entity.setTypeId(keyDto.getTypeId());
         entity.setNumberHex(keyDto.getNumberHex());
         entity.setNumberDec(keyDto.getNumberDec());

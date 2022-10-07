@@ -19,7 +19,7 @@ public class PartnerService extends CommonService<PartnerEntity, PartnerDto, Par
 
     @Override
     public PartnerEntity fromDTO(PartnerDto partnerDto) {
-        PartnerEntity entity = findById(partnerDto.getId()).orElse(new PartnerEntity());
+        PartnerEntity entity = findByIdForMapping(partnerDto.getId()).orElse(new PartnerEntity());
         entity.setId(partnerDto.getId());
         entity.setName(partnerDto.getName());
         entity.setCity(partnerDto.getCity());

@@ -29,7 +29,7 @@ public class KeyTypeService extends CommonService<KeyTypeEntity, KeyTypeDto, Key
 
     @Override
     public KeyTypeEntity fromDTO(KeyTypeDto keyTypeDto) {
-        KeyTypeEntity entity = findById(keyTypeDto.getId()).orElse(new KeyTypeEntity());
+        KeyTypeEntity entity = findByIdForMapping(keyTypeDto.getId()).orElse(new KeyTypeEntity());
         entity.setName(keyTypeDto.getName());
         entity.setId(keyTypeDto.getId());
         entity.setComment(keyTypeDto.getComment());

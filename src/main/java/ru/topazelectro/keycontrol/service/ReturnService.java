@@ -21,7 +21,7 @@ public class ReturnService extends CommonService<ReturnEntity, ReturnDto, Return
 
     @Override
     public ReturnEntity fromDTO(ReturnDto returnDto) {
-        ReturnEntity entity = findById(returnDto.getId()).orElse(new ReturnEntity());
+        ReturnEntity entity = findByIdForMapping(returnDto.getId()).orElse(new ReturnEntity());
         entity.setId(returnDto.getId());
         entity.setComment(returnDto.getComment());
         entity.setDateFact(returnDto.getDateFact());
