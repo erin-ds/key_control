@@ -29,7 +29,7 @@ databaseChangeLog:
                   type: varchar(250)
         - addForeignKeyConstraint:
             baseTableName: returns
-            baseColumnNames: return_sale_id
+            baseColumnNames: sale_id
             referencedTableName: sales
             referencedColumnNames: id
             constraintName: return_sale_id_sale_id_fk

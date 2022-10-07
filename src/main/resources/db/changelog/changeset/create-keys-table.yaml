@@ -29,7 +29,7 @@ databaseChangeLog:
                   type: varchar(250)
         - addForeignKeyConstraint:
             baseTableName: keys
-            baseColumnNames: key_type_id
+            baseColumnNames: type_id
             referencedTableName: key_types
             referencedColumnNames: id
             constraintName: keys_key_type_fk

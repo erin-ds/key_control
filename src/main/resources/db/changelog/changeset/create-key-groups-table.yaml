@@ -25,9 +25,9 @@ databaseChangeLog:
                   name: comment
                   type: varchar(250)
         - addForeignKeyConstraint:
-            baseTableName: keys_groups
-            baseColumnNames: keys_group_partner_id
+            baseTableName: key_groups
+            baseColumnNames: partner_id
             referencedTableName: partners
             referencedColumnNames: id
-            constraintName: keys_groups_partner_id_fk
+            constraintName: key_groups_partner_id_fk
 

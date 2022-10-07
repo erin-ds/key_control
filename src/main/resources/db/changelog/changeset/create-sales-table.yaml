@@ -98,6 +98,6 @@ databaseChangeLog:
         - addForeignKeyConstraint:
             baseTableName: sales
             baseColumnNames: key_group_id
-            referencedTableName: keys_groups
+            referencedTableName: key_groups
             referencedColumnNames: id
             constraintName: sales_key_group_id_key_group_id_fk
