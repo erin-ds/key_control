@@ -18,11 +18,11 @@ public class SaleEntity extends CommonEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "partner_id", referencedColumnName = "id", insertable = false,updatable = false)
-    private PartnerEntity partnerId;
+    private Long partnerId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "partner_id_end_user", referencedColumnName = "id", insertable = false,updatable = false)
-    private PartnerEntity partnerIdEndUser;
+    private Long partnerIdEndUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "software_id", referencedColumnName = "id", insertable = false, updatable = false)
@@ -30,7 +30,7 @@ public class SaleEntity extends CommonEntity{
 
     @OneToOne
     @JoinColumn(name = "key_id", referencedColumnName = "id", insertable = false,updatable = false)
-    private KeyEntity keyId;
+    private Long keyId;
 
     @Column(name = "flash_number")
     private int flashNumber;
