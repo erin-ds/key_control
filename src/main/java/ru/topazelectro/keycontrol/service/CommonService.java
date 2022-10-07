@@ -1,6 +1,10 @@
 package ru.topazelectro.keycontrol.service;
 
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import ru.topazelectro.keycontrol.dto.CommonDto;
 import ru.topazelectro.keycontrol.entity.CommonEntity;
 import ru.topazelectro.keycontrol.repository.CommonRepository;
@@ -21,12 +25,15 @@ public abstract class CommonService<KEY_CONTROL_ENTITY extends CommonEntity, KEY
     }
 
 
-    public List<KEY_CONTROL_DTO> getAllEntities() {
-        return repository
-                .findAll()
+    public Page<KEY_CONTROL_DTO> getAllEntities(int page, int listSize) {
+        Pageable pageable = PageRequest.of(page - 1, listSize);
+       List<KEY_CONTROL_DTO> dtoList = repository
+                .findAll(pageable)
                 .stream()
                 .map(this::toDTO)
                 .collect(Collectors.toList());
+        return new PageImpl<>(dtoList);
+
     }
 
     public KEY_CONTROL_DTO getById(Long id) {
