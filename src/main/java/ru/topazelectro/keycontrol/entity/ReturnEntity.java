@@ -15,9 +15,9 @@ import java.util.Objects;
 public class ReturnEntity extends CommonEntity{
 
 
-    @OneToOne(optional = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="sale_id", referencedColumnName = "id", updatable = false, insertable = false)
-    private Long saleId;
+    private SaleEntity saleEntity;
 
     @Column(name = "date_plan")
     private LocalDateTime datePlan;

@@ -18,19 +18,19 @@ public class SaleEntity extends CommonEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "partner_id", referencedColumnName = "id", insertable = false,updatable = false)
-    private Long partnerId;
+    private PartnerEntity partnerEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "partner_id_end_user", referencedColumnName = "id", insertable = false,updatable = false)
-    private Long partnerIdEndUser;
+    private PartnerEntity partnerEntityEndUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "software_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private Long softwareId;
+    private SoftwareEntity softwareEntity;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "key_id", referencedColumnName = "id", insertable = false,updatable = false)
-    private Long keyId;
+    private KeyEntity keyEntity;
 
     @Column(name = "flash_number")
     private int flashNumber;
@@ -50,9 +50,9 @@ public class SaleEntity extends CommonEntity{
     @Column(name = "license_paktan")
     private int licensePaktan;
 
-    @OneToOne(optional = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "key_group_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private Long keyGroupId;
+    private KeyGroupEntity keyGroupEntity;
 
     @Column(name = "is_return")
     private boolean isReturn;

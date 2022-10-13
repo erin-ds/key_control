@@ -4,15 +4,21 @@ import org.springframework.stereotype.Service;
 import ru.topazelectro.keycontrol.dto.ReturnDto;
 import ru.topazelectro.keycontrol.entity.ReturnEntity;
 import ru.topazelectro.keycontrol.repository.ReturnRepository;
+
+import javax.inject.Inject;
+
 @Service
 public class ReturnService extends CommonService<ReturnEntity, ReturnDto, ReturnRepository> {
+
+    @Inject
+    SaleService saleService;
 
     @Override
     public ReturnDto toDTO(ReturnEntity returnEntity) {
         ReturnDto dto = ReturnDto.builder()
                 .dateFact(returnEntity.getDateFact())
                 .datePlan(returnEntity.getDatePlan())
-                .saleId(returnEntity.getSaleId())
+                .saleId(returnEntity.getSaleEntity().getId())
                 .build();
         dto.setId(returnEntity.getId());
         dto.setComment(returnEntity.getComment());
@@ -26,7 +32,7 @@ public class ReturnService extends CommonService<ReturnEntity, ReturnDto, Return
         entity.setComment(returnDto.getComment());
         entity.setDateFact(returnDto.getDateFact());
         entity.setDatePlan(returnDto.getDatePlan());
-        entity.setSaleId(returnDto.getSaleId());
+        entity.setSaleEntity(saleService.findByIdForMapping(returnDto.getId()).get());
         return entity;
     }
 }

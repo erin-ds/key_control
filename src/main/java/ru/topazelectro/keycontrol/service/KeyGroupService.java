@@ -5,15 +5,19 @@ import ru.topazelectro.keycontrol.dto.KeyGroupDto;
 import ru.topazelectro.keycontrol.entity.KeyGroupEntity;
 import ru.topazelectro.keycontrol.repository.KeyGroupRepository;
 
+import javax.inject.Inject;
+
 @Service
 public class KeyGroupService extends CommonService<KeyGroupEntity, KeyGroupDto, KeyGroupRepository> {
 
+    @Inject
+    PartnerService partnerService;
 
     @Override
     public KeyGroupDto toDTO(KeyGroupEntity keyGroupEntity) {
         KeyGroupDto dto = KeyGroupDto.builder()
                 .number(keyGroupEntity.getNumber())
-                .partnerId(keyGroupEntity.getPartnerId())
+                .partnerId(keyGroupEntity.getPartnerEntity().getId())
                 .build();
         dto.setId(keyGroupEntity.getId());
         dto.setComment(keyGroupEntity.getComment());
@@ -26,7 +30,7 @@ public class KeyGroupService extends CommonService<KeyGroupEntity, KeyGroupDto, 
         entity.setId(keyGroupDto.getId());
         entity.setNumber(keyGroupDto.getNumber());
         entity.setComment(keyGroupDto.getComment());
-        entity.setPartnerId(keyGroupDto.getPartnerId());
+        entity.setPartnerEntity(partnerService.findByIdForMapping(keyGroupDto.getId()).get());
         return entity;
     }
 }

@@ -20,7 +20,7 @@ public class KeyGroupEntity extends CommonEntity{
 
     @OneToOne(optional = false)
     @JoinColumn(name = "partner_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private Long partnerId;
+    private PartnerEntity partnerEntity;
 
 
     @Override
