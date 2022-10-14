@@ -27,7 +27,7 @@ public class KeyController {
     @Inject
     SoftwareService softwareService;
 
-    @GetMapping("/key")
+    @GetMapping("/key/all")
     public Page<KeyDto> getAllKeys(@RequestParam(defaultValue = "1", required = false) int pageNumber,
                                    @RequestParam(defaultValue = "10", required = false) int listSize) {
         return keyService.getAllEntities(pageNumber, listSize);
@@ -49,7 +49,7 @@ public class KeyController {
         return keyService.update(keyDto);
     }
 
-    @GetMapping("/key-group")
+    @GetMapping("/key-group/all")
     public Page<KeyGroupDto> getAllKeyGroups(@RequestParam(defaultValue = "1", required = false) int pageNumber,
                                              @RequestParam(defaultValue = "10", required = false) int listSize) {
         return keyGroupService.getAllEntities(pageNumber, listSize);
@@ -70,7 +70,7 @@ public class KeyController {
         return keyGroupService.update(keyGroupDtoDto);
     }
 
-    @GetMapping("/key-type")
+    @GetMapping("/key-type/all")
     public Page<KeyTypeDto> getAllKeyTypes(@RequestParam(defaultValue = "1", required = false) int pageNumber,
                                        @RequestParam(defaultValue = "10", required = false) int listSize) {
         return keyTypeService.getAllEntities(pageNumber, listSize);
@@ -92,7 +92,7 @@ public class KeyController {
         return keyTypeService.update(keyTypeDto);
     }
 
-    @GetMapping("/partner")
+    @GetMapping("/partner/all")
     public Page<PartnerDto> getAllPartners(@RequestParam(defaultValue = "1", required = false) int pageNumber,
                                       @RequestParam(defaultValue = "10", required = false) int listSize) {
         return partnerService.getAllEntities(pageNumber, listSize);
@@ -114,7 +114,7 @@ public class KeyController {
         return partnerService.update(partnerDto);
     }
 
-    @GetMapping("/returns")
+    @GetMapping("/returns/all")
     public Page<ReturnDto> getAllReturns(@RequestParam(defaultValue = "1", required = false) int pageNumber,
                                      @RequestParam(defaultValue = "10", required = false) int listSize) {
         return returnService.getAllEntities(pageNumber, listSize);
@@ -136,7 +136,7 @@ public class KeyController {
         return returnService.update(returnDto);
     }
 
-    @GetMapping("/sale")
+    @GetMapping("/sale/all")
     public Page<SaleDto> getAllSales(@RequestParam(defaultValue = "1", required = false) int pageNumber,
                                   @RequestParam(defaultValue = "10", required = false) int listSize) {
         return saleService.getAllEntities(pageNumber, listSize);
@@ -158,7 +158,7 @@ public class KeyController {
         return saleService.update(saleDto);
     }
 
-    @GetMapping("/software")
+    @GetMapping("/software/all")
     public Page<SoftwareDto> getAllSoftware(@RequestParam(defaultValue = "1", required = false) int pageNumber,
                                   @RequestParam(defaultValue = "10", required = false) int listSize) {
         return softwareService.getAllEntities(pageNumber, listSize);

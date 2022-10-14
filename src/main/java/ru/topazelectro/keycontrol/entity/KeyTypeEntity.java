@@ -18,9 +18,6 @@ public class KeyTypeEntity extends CommonEntity{
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "id", orphanRemoval = true)
-    private List<KeyEntity> keyEntities;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
