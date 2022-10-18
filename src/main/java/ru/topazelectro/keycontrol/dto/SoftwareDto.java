@@ -1,5 +1,6 @@
 package ru.topazelectro.keycontrol.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
 import ru.topazelectro.keycontrol.entity.Software;
@@ -11,5 +12,6 @@ import ru.topazelectro.keycontrol.entity.Software;
 @Builder
 public class SoftwareDto extends CommonDto {
 
+    @Schema(description = "Наименование ПО")
     private final String name;
 }

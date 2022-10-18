@@ -34,7 +34,7 @@ public class SaleService extends CommonService<Sale, SaleDto, SaleRepository> {
                 .licenseCabinet(saleEntity.getLicenseCabinet())
                 .licensePaktan(saleEntity.getLicensePaktan())
                 .keyGroupId(saleEntity.getKeyGroupEntity().getId())
-                .isReturn(saleEntity.isReturn())
+                .returned(saleEntity.isReturn())
                 .orderNumber(saleEntity.getOrderNumber())
                 .billNumber(saleEntity.getBillNumber())
                 .build();
@@ -58,7 +58,7 @@ public class SaleService extends CommonService<Sale, SaleDto, SaleRepository> {
         entity.setLicenseCabinet(saleDto.getLicenseCabinet());
         entity.setLicensePaktan(saleDto.getLicensePaktan());
         entity.setKeyGroupEntity(keyGroupService.findByIdForMapping(saleDto.getId()).get());
-        entity.setReturn(saleDto.isReturn());
+        entity.setReturn(saleDto.isReturned());
         entity.setOrderNumber(saleDto.getOrderNumber());
         entity.setBillNumber(saleDto.getBillNumber());
         entity.setId(saleDto.getId());

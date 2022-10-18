@@ -88,7 +88,7 @@ public class KeyController {
     }
 
     @GetMapping("/key-type/all")
-    @Tag(name = "Типы ключей", description = "Тип подключения (usb\\LPT), тип ключа (сетевой\\локальный)")
+    @Tag(name = "Типы ключей", description = "Тип подключения (USB\\LPT), тип ключа (сетевой\\локальный)")
     @Operation (summary = "Получить список всех типов ключей")
     public Page<KeyTypeDto> getAllKeyTypes(@RequestParam(defaultValue = "1", required = false) int pageNumber,
                                            @RequestParam(defaultValue = "10", required = false) int listSize) {
