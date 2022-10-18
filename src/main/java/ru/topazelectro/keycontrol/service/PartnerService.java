@@ -2,12 +2,12 @@ package ru.topazelectro.keycontrol.service;
 
 import org.springframework.stereotype.Service;
 import ru.topazelectro.keycontrol.dto.PartnerDto;
-import ru.topazelectro.keycontrol.entity.PartnerEntity;
+import ru.topazelectro.keycontrol.entity.Partner;
 import ru.topazelectro.keycontrol.repository.PartnerRepository;
 @Service
-public class PartnerService extends CommonService<PartnerEntity, PartnerDto, PartnerRepository> {
+public class PartnerService extends CommonService<Partner, PartnerDto, PartnerRepository> {
     @Override
-    public PartnerDto toDTO(PartnerEntity partnerEntity) {
+    public PartnerDto toDTO(Partner partnerEntity) {
         PartnerDto dto = PartnerDto.builder()
                 .name(partnerEntity.getName())
                 .city(partnerEntity.getCity())
@@ -18,8 +18,8 @@ public class PartnerService extends CommonService<PartnerEntity, PartnerDto, Par
     }
 
     @Override
-    public PartnerEntity fromDTO(PartnerDto partnerDto) {
-        PartnerEntity entity = findByIdForMapping(partnerDto.getId()).orElse(new PartnerEntity());
+    public Partner fromDTO(PartnerDto partnerDto) {
+        Partner entity = findByIdForMapping(partnerDto.getId()).orElse(new Partner());
         entity.setId(partnerDto.getId());
         entity.setName(partnerDto.getName());
         entity.setCity(partnerDto.getCity());

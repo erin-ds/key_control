@@ -11,12 +11,12 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "keys")
-public class KeyEntity extends CommonEntity {
+public class Key extends CommonEntity {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id", referencedColumnName = "id", insertable = true, updatable = false)
-    private KeyTypeEntity keyTypeEntity;
+    private KeyType keyTypeEntity;
 
     @Column(name = "number_hex")
     private String numberHex;
@@ -27,7 +27,7 @@ public class KeyEntity extends CommonEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        KeyEntity keyEntity = (KeyEntity) o;
+        Key keyEntity = (Key) o;
         return id != null && Objects.equals(id, keyEntity.id);
     }
 

@@ -12,7 +12,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "key_groups")
-public class KeyGroupEntity extends CommonEntity{
+public class KeyGroup extends CommonEntity{
 
 
     @Column(name = "number")
@@ -20,14 +20,14 @@ public class KeyGroupEntity extends CommonEntity{
 
     @ManyToOne//(optional = false)
     @JoinColumn(name = "partner_id", referencedColumnName = "id", insertable = true, updatable = false)
-    private PartnerEntity partnerEntity;
+    private Partner partnerEntity;
 
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        KeyGroupEntity that = (KeyGroupEntity) o;
+        KeyGroup that = (KeyGroup) o;
         return id != null && Objects.equals(id, that.id);
     }
 

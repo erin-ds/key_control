@@ -2,14 +2,13 @@ package ru.topazelectro.keycontrol.service;
 
 import org.springframework.stereotype.Service;
 import ru.topazelectro.keycontrol.dto.SaleDto;
-import ru.topazelectro.keycontrol.entity.KeyGroupEntity;
-import ru.topazelectro.keycontrol.entity.SaleEntity;
+import ru.topazelectro.keycontrol.entity.Sale;
 import ru.topazelectro.keycontrol.repository.SaleRepository;
 
 import javax.inject.Inject;
 
 @Service
-public class SaleService extends CommonService<SaleEntity, SaleDto, SaleRepository> {
+public class SaleService extends CommonService<Sale, SaleDto, SaleRepository> {
 
     @Inject
     PartnerService partnerService;
@@ -21,7 +20,7 @@ public class SaleService extends CommonService<SaleEntity, SaleDto, SaleReposito
     KeyGroupService keyGroupService;
 
     @Override
-    public SaleDto toDTO(SaleEntity saleEntity) {
+    public SaleDto toDTO(Sale saleEntity) {
         SaleDto dto = SaleDto.builder()
                 .date(saleEntity.getDate())
                 .partnerId(saleEntity.getPartnerEntity().getId())
@@ -45,8 +44,8 @@ public class SaleService extends CommonService<SaleEntity, SaleDto, SaleReposito
     }
 
     @Override
-    public SaleEntity fromDTO(SaleDto saleDto) {
-        SaleEntity entity = findByIdForMapping(saleDto.getId()).orElse(new SaleEntity());
+    public Sale fromDTO(SaleDto saleDto) {
+        Sale entity = findByIdForMapping(saleDto.getId()).orElse(new Sale());
         entity.setDate(saleDto.getDate());
         entity.setPartnerEntity(partnerService.findByIdForMapping(saleDto.getId()).get());
         entity.setPartnerEntityEndUser(partnerService.findByIdForMapping(saleDto.getId()).get());

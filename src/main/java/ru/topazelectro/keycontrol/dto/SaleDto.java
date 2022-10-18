@@ -2,16 +2,10 @@ package ru.topazelectro.keycontrol.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import ru.topazelectro.keycontrol.entity.KeyEntity;
-import ru.topazelectro.keycontrol.entity.KeyGroupEntity;
-import ru.topazelectro.keycontrol.entity.PartnerEntity;
-import ru.topazelectro.keycontrol.entity.SoftwareEntity;
-
-import java.io.Serializable;
-import java.time.LocalDateTime;
+import ru.topazelectro.keycontrol.entity.Sale;
 
 /**
- * A DTO for the {@link ru.topazelectro.keycontrol.entity.SaleEntity} entity
+ * A DTO for the {@link Sale} entity
  */
 @Data
 @Builder

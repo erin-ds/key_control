@@ -10,26 +10,26 @@ import java.util.Objects;
 @Setter
 @RequiredArgsConstructor
 @Table(name = "sales")
-public class SaleEntity extends CommonEntity{
+public class Sale extends CommonEntity{
 
     @Column(name = "date")
     private Long date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "partner_id", referencedColumnName = "id", insertable = true, updatable = false)
-    private PartnerEntity partnerEntity;
+    private Partner partnerEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "partner_id_end_user", referencedColumnName = "id", insertable = true, updatable = false)
-    private PartnerEntity partnerEntityEndUser;
+    private Partner partnerEntityEndUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "software_id", referencedColumnName = "id", insertable = true, updatable = false)
-    private SoftwareEntity softwareEntity;
+    private Software softwareEntity;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "key_id", referencedColumnName = "id", insertable = true, updatable = false)
-    private KeyEntity keyEntity;
+    private Key keyEntity;
 
     @Column(name = "flash_number")
     private int flashNumber;
@@ -51,7 +51,7 @@ public class SaleEntity extends CommonEntity{
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "key_group_id", referencedColumnName = "id", insertable = true, updatable = false)
-    private KeyGroupEntity keyGroupEntity;
+    private KeyGroup keyGroupEntity;
 
     @Column(name = "is_return")
     private boolean isReturn;
@@ -67,7 +67,7 @@ public class SaleEntity extends CommonEntity{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        SaleEntity that = (SaleEntity) o;
+        Sale that = (Sale) o;
         return id != null && Objects.equals(id, that.id);
     }
 

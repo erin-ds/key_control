@@ -26,6 +26,7 @@ public class SwaggerConfig {
                         .license(new License().name("Apache 2.0").url("http://springdoc.org"))
                         .contact(
                                 new Contact()
+                                        .email("erin_ds@topazelectro.ru")
                                         .email("pps@topazelectro.ru")
                                         .name("Отдел ПО"))))
                 .externalDocs(new ExternalDocumentation()

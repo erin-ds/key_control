@@ -3,33 +3,24 @@ package ru.topazelectro.keycontrol.entity;
 import lombok.*;
 import org.hibernate.Hibernate;
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Entity
 @Getter
 @Setter
 @RequiredArgsConstructor
-@Table(name = "returns")
-public class ReturnEntity extends CommonEntity{
+@Entity
+@Table(name = "key_types")
+public class KeyType extends CommonEntity{
 
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="sale_id", referencedColumnName = "id", updatable = false, insertable = true)
-    private SaleEntity saleEntity;
-
-    @Column(name = "date_plan")
-    private LocalDateTime datePlan;
-
-    @Column(name = "date_fact")
-    private LocalDateTime dateFact;
-
+    @Column(name = "name")
+    private String name;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        ReturnEntity that = (ReturnEntity) o;
+        KeyType that = (KeyType) o;
         return id != null && Objects.equals(id, that.id);
     }
 

@@ -5,13 +5,12 @@ import org.hibernate.Hibernate;
 import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
 @Getter
 @Setter
 @RequiredArgsConstructor
-@Entity
-@Table(name = "key_types")
-public class KeyTypeEntity extends CommonEntity{
-
+@Table(name = "software")
+public class Software extends CommonEntity{
 
     @Column(name = "name")
     private String name;
@@ -20,7 +19,7 @@ public class KeyTypeEntity extends CommonEntity{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        KeyTypeEntity that = (KeyTypeEntity) o;
+        Software that = (Software) o;
         return id != null && Objects.equals(id, that.id);
     }
 

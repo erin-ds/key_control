@@ -2,11 +2,10 @@ package ru.topazelectro.keycontrol.dto;
 
 import lombok.Builder;
 import lombok.Data;
-
-import java.io.Serializable;
+import ru.topazelectro.keycontrol.entity.Software;
 
 /**
- * A DTO for the {@link ru.topazelectro.keycontrol.entity.SoftwareEntity} entity
+ * A DTO for the {@link Software} entity
  */
 @Data
 @Builder
