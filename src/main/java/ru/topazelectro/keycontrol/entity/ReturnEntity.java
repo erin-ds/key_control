@@ -2,7 +2,6 @@ package ru.topazelectro.keycontrol.entity;
 
 import lombok.*;
 import org.hibernate.Hibernate;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -16,7 +15,7 @@ public class ReturnEntity extends CommonEntity{
 
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="sale_id", referencedColumnName = "id", updatable = false, insertable = false)
+    @JoinColumn(name="sale_id", referencedColumnName = "id", updatable = false, insertable = true)
     private SaleEntity saleEntity;
 
     @Column(name = "date_plan")

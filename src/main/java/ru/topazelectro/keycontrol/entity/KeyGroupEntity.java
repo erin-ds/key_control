@@ -18,8 +18,8 @@ public class KeyGroupEntity extends CommonEntity{
     @Column(name = "number")
     private Long number;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name = "partner_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne//(optional = false)
+    @JoinColumn(name = "partner_id", referencedColumnName = "id", insertable = true, updatable = false)
     private PartnerEntity partnerEntity;
 
 

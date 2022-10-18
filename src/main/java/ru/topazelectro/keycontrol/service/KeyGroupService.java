@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.topazelectro.keycontrol.dto.KeyGroupDto;
 import ru.topazelectro.keycontrol.entity.KeyGroupEntity;
 import ru.topazelectro.keycontrol.repository.KeyGroupRepository;
+import ru.topazelectro.keycontrol.repository.PartnerRepository;
 
 import javax.inject.Inject;
 
@@ -12,6 +13,8 @@ public class KeyGroupService extends CommonService<KeyGroupEntity, KeyGroupDto, 
 
     @Inject
     PartnerService partnerService;
+    @Inject
+    PartnerRepository partnerRepository;
 
     @Override
     public KeyGroupDto toDTO(KeyGroupEntity keyGroupEntity) {
@@ -27,10 +30,11 @@ public class KeyGroupService extends CommonService<KeyGroupEntity, KeyGroupDto, 
     @Override
     public KeyGroupEntity fromDTO(KeyGroupDto keyGroupDto) {
         KeyGroupEntity entity = findByIdForMapping(keyGroupDto.getId()).orElse(new KeyGroupEntity());
+        entity.setPartnerEntity(partnerService.findByIdForMapping(keyGroupDto.getPartnerId()).get());
         entity.setId(keyGroupDto.getId());
         entity.setNumber(keyGroupDto.getNumber());
+
         entity.setComment(keyGroupDto.getComment());
-        entity.setPartnerEntity(partnerService.findByIdForMapping(keyGroupDto.getId()).get());
         return entity;
     }
 }

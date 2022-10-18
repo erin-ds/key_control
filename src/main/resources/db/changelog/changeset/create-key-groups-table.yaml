@@ -21,6 +21,8 @@ databaseChangeLog:
               - column:
                   name: partner_id
                   type: bigint
+                  constraints:
+                    nullable: false
               - column:
                   name: comment
                   type: varchar(250)

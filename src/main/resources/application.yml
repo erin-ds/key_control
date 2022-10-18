@@ -1,5 +1,5 @@
 server:
-  port: 15411
+  port: 15410
 spring:
   application:
     name: key-control

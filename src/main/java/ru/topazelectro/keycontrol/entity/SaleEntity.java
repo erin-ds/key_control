@@ -2,7 +2,6 @@ package ru.topazelectro.keycontrol.entity;
 
 import lombok.*;
 import org.hibernate.Hibernate;
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -17,19 +16,19 @@ public class SaleEntity extends CommonEntity{
     private Long date;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "partner_id", referencedColumnName = "id", insertable = false,updatable = false)
+    @JoinColumn(name = "partner_id", referencedColumnName = "id", insertable = true, updatable = false)
     private PartnerEntity partnerEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "partner_id_end_user", referencedColumnName = "id", insertable = false,updatable = false)
+    @JoinColumn(name = "partner_id_end_user", referencedColumnName = "id", insertable = true, updatable = false)
     private PartnerEntity partnerEntityEndUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "software_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "software_id", referencedColumnName = "id", insertable = true, updatable = false)
     private SoftwareEntity softwareEntity;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "key_id", referencedColumnName = "id", insertable = false,updatable = false)
+    @JoinColumn(name = "key_id", referencedColumnName = "id", insertable = true, updatable = false)
     private KeyEntity keyEntity;
 
     @Column(name = "flash_number")
@@ -51,7 +50,7 @@ public class SaleEntity extends CommonEntity{
     private int licensePaktan;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "key_group_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "key_group_id", referencedColumnName = "id", insertable = true, updatable = false)
     private KeyGroupEntity keyGroupEntity;
 
     @Column(name = "is_return")
