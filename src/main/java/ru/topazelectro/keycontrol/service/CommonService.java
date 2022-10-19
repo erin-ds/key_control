@@ -50,10 +50,10 @@ public abstract class CommonService<KEY_CONTROL_ENTITY extends CommonEntity, KEY
     }
 
     public KEY_CONTROL_DTO update(KEY_CONTROL_DTO dto) {
-        if (dto.getId() == null) {
-            throw new RuntimeException("Для существующей записи id должен быть указан");
+        if (dto.getId() == null || !repository.existsById(dto.getId())) {
+            throw new RuntimeException("Пустой ID или не существующий");
         } else {
-            KEY_CONTROL_ENTITY entity = repository.findById(dto.getId()).orElseThrow(() -> new RuntimeException("Id не найден"));
+            KEY_CONTROL_ENTITY entity = fromDTO(dto);
             return toDTO(repository.save(entity));
         }
     }
