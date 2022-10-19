@@ -54,7 +54,7 @@ public class KeyController {
     @PutMapping("/key")
     @Tag(name = "Ключи")
     @Operation (summary = "Изменить информацию о ключе в БД")
-    public KeyDto editKey(@RequestParam KeyDto keyDto) {
+    public KeyDto editKey(@RequestBody KeyDto keyDto) {
         return keyService.update(keyDto);
     }
 
@@ -83,8 +83,8 @@ public class KeyController {
     @PutMapping("/key-group")
     @Tag(name = "Группы")
     @Operation (summary = "Изменить информацию о группе в БД")
-    public KeyGroupDto editKeyGroup(@RequestParam KeyGroupDto keyGroupDtoDto) {
-        return keyGroupService.update(keyGroupDtoDto);
+    public KeyGroupDto editKeyGroup(@RequestBody KeyGroupDto keyGroupDto) {
+        return keyGroupService.update(keyGroupDto);
     }
 
     @GetMapping("/key-type/all")
@@ -113,7 +113,7 @@ public class KeyController {
     @PutMapping("/key-type")
     @Tag(name = "Типы ключей")
     @Operation (summary = "Изменить информацию о типе ключа в БД")
-    public KeyTypeDto editKeyType(@RequestParam KeyTypeDto keyTypeDto) {
+    public KeyTypeDto editKeyType(@RequestBody KeyTypeDto keyTypeDto) {
         return keyTypeService.update(keyTypeDto);
     }
 
@@ -143,7 +143,7 @@ public class KeyController {
     @PutMapping("/partner")
     @Tag(name = "Контрагенты")
     @Operation (summary = "Изменить информацию о контрагенте в БД")
-    public PartnerDto editPartner(@RequestParam PartnerDto partnerDto) {
+    public PartnerDto editPartner(@RequestBody PartnerDto partnerDto) {
         return partnerService.update(partnerDto);
     }
 
@@ -173,7 +173,7 @@ public class KeyController {
     @PutMapping("/returns")
     @Tag(name = "Возвраты")
     @Operation (summary = "Изменить информацию о возврате в БД")
-    public ReturnDto editReturn(@RequestParam ReturnDto returnDto) {
+    public ReturnDto editReturn(@RequestBody ReturnDto returnDto) {
         return returnService.update(returnDto);
     }
 
@@ -203,7 +203,7 @@ public class KeyController {
     @PutMapping("/sale")
     @Tag(name = "Продажи")
     @Operation (summary = "Изменить информацию о продаже в БД")
-    public SaleDto editSale(@RequestParam SaleDto saleDto) {
+    public SaleDto editSale(@RequestBody SaleDto saleDto) {
         return saleService.update(saleDto);
     }
 
@@ -233,7 +233,7 @@ public class KeyController {
     @PutMapping("/software")
     @Tag(name = "Типы программного обеспечения")
     @Operation (summary = "Изменить тип ПО")
-    public SoftwareDto editSoftware(@RequestParam SoftwareDto softwareDto) {
+    public SoftwareDto editSoftware(@RequestBody SoftwareDto softwareDto) {
         return softwareService.update(softwareDto);
     }
 
