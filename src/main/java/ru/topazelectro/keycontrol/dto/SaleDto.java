@@ -1,45 +1,49 @@
 package ru.topazelectro.keycontrol.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import ru.topazelectro.keycontrol.entity.Sale;
+
+import java.time.LocalDateTime;
 
 /**
  * A DTO for the {@link Sale} entity
  */
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class SaleDto extends CommonDto {
 
     @Schema(description = "Даты")
-    private final Long date;
+    private LocalDateTime date;
     @Schema(description = "ID существующего контрагента (покупателя)")
-    private final Long partnerId;
+    private Long partnerId;
     @Schema(description = "ID существующего контрагента (фактического пользователя ПО)")
-    private final Long partnerIdEndUser;
+    private Long partnerIdEndUser;
     @Schema(description = "ID типа программного обеспечения")
-    private final Long softwareId;
+    private Long softwareId;
     @Schema(description = "ID ключа")
-    private final Long keyId;
+    private Long keyId;
     @Schema(description = "Номер флешки с ПО")
-    private final int flashNumber;
+    private int flashNumber;
     @Schema(description = "Лицензия расчётного центра")
-    private final int licenseCashless;
+    private int licenseCashless;
     @Schema(description = "Лицензия дисконтного центра")
-    private final int licenseDiscount;
+    private int licenseDiscount;
     @Schema(description = "Лицензия отчётного центра")
-    private final int licenseReport;
+    private int licenseReport;
     @Schema(description = "Лицензия личного кабинета РЦ")
-    private final int licenseCabinet;
+    private int licenseCabinet;
     @Schema(description = "Лицензия автоналива")
-    private final int licensePaktan;
+    private int licensePaktan;
     @Schema(description = "ID группы")
-    private final Long keyGroupId;
+    private Long keyGroupId;
     @Schema(description = "Вернули\\Не вернули")
-    private final boolean returned;
+    private boolean returned;
     @Schema(description = "Номер заказа")
-    private final int orderNumber;
+    private int orderNumber;
     @Schema(description = "Номер счета")
-    private final int billNumber;
+    private int billNumber;
 }

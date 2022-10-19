@@ -1,11 +1,13 @@
 package ru.topazelectro.keycontrol.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class KeyTypeDto extends CommonDto {
 

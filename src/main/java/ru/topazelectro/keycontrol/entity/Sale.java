@@ -3,6 +3,9 @@ package ru.topazelectro.keycontrol.entity;
 import lombok.*;
 import org.hibernate.Hibernate;
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -13,7 +16,7 @@ import java.util.Objects;
 public class Sale extends CommonEntity{
 
     @Column(name = "date")
-    private Long date;
+    private LocalDateTime date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "partner_id", referencedColumnName = "id", insertable = true, updatable = false)
