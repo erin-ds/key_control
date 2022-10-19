@@ -6,6 +6,7 @@ import ru.topazelectro.keycontrol.entity.Sale;
 import ru.topazelectro.keycontrol.repository.SaleRepository;
 
 import javax.inject.Inject;
+import java.time.LocalDate;
 
 @Service
 public class SaleService extends CommonService<Sale, SaleDto, SaleRepository> {
@@ -47,17 +48,17 @@ public class SaleService extends CommonService<Sale, SaleDto, SaleRepository> {
     public Sale fromDTO(SaleDto saleDto) {
         Sale entity = findByIdForMapping(saleDto.getId()).orElse(new Sale());
         entity.setDate(saleDto.getDate());
-        entity.setPartnerEntity(partnerService.findByIdForMapping(saleDto.getId()).get());
-        entity.setPartnerEntityEndUser(partnerService.findByIdForMapping(saleDto.getId()).get());
-        entity.setSoftwareEntity(softwareService.findByIdForMapping(saleDto.getId()).get());
-        entity.setKeyEntity(keyService.findByIdForMapping(saleDto.getId()).get());
+        entity.setPartnerEntity(partnerService.findByIdForMapping(saleDto.getPartnerId()).get());
+        entity.setPartnerEntityEndUser(partnerService.findByIdForMapping(saleDto.getPartnerIdEndUser()).get());
+        entity.setSoftwareEntity(softwareService.findByIdForMapping(saleDto.getSoftwareId()).get());
+        entity.setKeyEntity(keyService.findByIdForMapping(saleDto.getKeyId()).get());
         entity.setFlashNumber(saleDto.getFlashNumber());
         entity.setLicenseCashless(saleDto.getLicenseCashless());
         entity.setLicenseDiscount(saleDto.getLicenseDiscount());
         entity.setLicenseReport(saleDto.getLicenseReport());
         entity.setLicenseCabinet(saleDto.getLicenseCabinet());
         entity.setLicensePaktan(saleDto.getLicensePaktan());
-        entity.setKeyGroupEntity(keyGroupService.findByIdForMapping(saleDto.getId()).get());
+        entity.setKeyGroupEntity(keyGroupService.findByIdForMapping(saleDto.getKeyGroupId()).get());
         entity.setReturn(saleDto.isReturned());
         entity.setOrderNumber(saleDto.getOrderNumber());
         entity.setBillNumber(saleDto.getBillNumber());

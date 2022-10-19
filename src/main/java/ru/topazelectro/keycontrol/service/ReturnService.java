@@ -32,7 +32,7 @@ public class ReturnService extends CommonService<Return, ReturnDto, ReturnReposi
         entity.setComment(returnDto.getComment());
         entity.setDateFact(returnDto.getDateFact());
         entity.setDatePlan(returnDto.getDatePlan());
-        entity.setSaleEntity(saleService.findByIdForMapping(returnDto.getId()).get());
+        entity.setSaleEntity(saleService.findByIdForMapping(returnDto.getSaleId()).get());
         return entity;
     }
 }
