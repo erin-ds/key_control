@@ -18,6 +18,7 @@ databaseChangeLog:
                   type: bigint
                   constraints:
                     nullable: false
+                    unique: true
               - column:
                   name: partner_id
                   type: bigint
