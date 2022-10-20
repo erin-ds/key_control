@@ -3,9 +3,17 @@ package ru.topazelectro.keycontrol.service;
 import org.springframework.stereotype.Service;
 import ru.topazelectro.keycontrol.dto.PartnerDto;
 import ru.topazelectro.keycontrol.entity.Partner;
+import ru.topazelectro.keycontrol.exceptions.PartnerAlreadyExistException;
 import ru.topazelectro.keycontrol.repository.PartnerRepository;
+
+import javax.inject.Inject;
+
 @Service
 public class PartnerService extends CommonService<Partner, PartnerDto, PartnerRepository> {
+
+    @Inject
+    PartnerRepository partnerRepository;
+
     @Override
     public PartnerDto toDTO(Partner partnerEntity) {
         PartnerDto dto = PartnerDto.builder()
@@ -26,4 +34,14 @@ public class PartnerService extends CommonService<Partner, PartnerDto, PartnerRe
         entity.setComment(partnerDto.getComment());
         return entity;
     }
+
+    @Override
+    public PartnerDto save(PartnerDto partnerDto) {
+        if (partnerRepository.findByName(partnerDto.getName()).isPresent()) {
+            throw new PartnerAlreadyExistException();
+        } else {
+            return super.save(partnerDto);
+        }
+    }
+
 }

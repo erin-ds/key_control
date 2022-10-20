@@ -7,6 +7,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import ru.topazelectro.keycontrol.dto.CommonDto;
 import ru.topazelectro.keycontrol.entity.CommonEntity;
+import ru.topazelectro.keycontrol.exceptions.EmptyOrNonExistingIdException;
+import ru.topazelectro.keycontrol.exceptions.IdNotFoundException;
+import ru.topazelectro.keycontrol.exceptions.IdNotNullException;
 import ru.topazelectro.keycontrol.repository.CommonRepository;
 
 import javax.inject.Inject;
@@ -37,7 +40,7 @@ public abstract class CommonService<KEY_CONTROL_ENTITY extends CommonEntity, KEY
     }
 
     public KEY_CONTROL_DTO getById(Long id) {
-        return toDTO(repository.findById(id).orElseThrow(() -> new RuntimeException("Id не найден")));
+        return toDTO(repository.findById(id).orElseThrow(() -> new IdNotFoundException()));
     }
 
     public KEY_CONTROL_DTO save(KEY_CONTROL_DTO dto) {
@@ -45,13 +48,13 @@ public abstract class CommonService<KEY_CONTROL_ENTITY extends CommonEntity, KEY
             KEY_CONTROL_ENTITY entity = fromDTO(dto);
             return toDTO(repository.save(entity));
         } else {
-            throw new RuntimeException("Для новой записи id всегда должен быть null");
+            throw new IdNotNullException();
         }
     }
 
     public KEY_CONTROL_DTO update(KEY_CONTROL_DTO dto) {
         if (dto.getId() == null || !repository.existsById(dto.getId())) {
-            throw new RuntimeException("Пустой ID или не существующий");
+            throw new EmptyOrNonExistingIdException();
         } else {
             KEY_CONTROL_ENTITY entity = fromDTO(dto);
             return toDTO(repository.save(entity));

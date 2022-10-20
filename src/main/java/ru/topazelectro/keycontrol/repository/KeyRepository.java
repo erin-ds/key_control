@@ -4,5 +4,5 @@ import org.springframework.stereotype.Repository;
 import ru.topazelectro.keycontrol.entity.Key;
 
 @Repository
-public interface KeyRepository extends CommonRepository<Key>{
+public interface KeyRepository extends CommonRepository<Key> {
 }
