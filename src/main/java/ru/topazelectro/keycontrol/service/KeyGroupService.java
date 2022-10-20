@@ -3,8 +3,8 @@ package ru.topazelectro.keycontrol.service;
 import org.springframework.stereotype.Service;
 import ru.topazelectro.keycontrol.dto.KeyGroupDto;
 import ru.topazelectro.keycontrol.entity.KeyGroup;
+import ru.topazelectro.keycontrol.exceptions.NumberAlreadyExistException;
 import ru.topazelectro.keycontrol.repository.KeyGroupRepository;
-import ru.topazelectro.keycontrol.repository.PartnerRepository;
 
 import javax.inject.Inject;
 
@@ -13,8 +13,9 @@ public class KeyGroupService extends CommonService<KeyGroup, KeyGroupDto, KeyGro
 
     @Inject
     PartnerService partnerService;
+
     @Inject
-    PartnerRepository partnerRepository;
+    KeyGroupRepository keyGroupRepository;
 
     @Override
     public KeyGroupDto toDTO(KeyGroup keyGroupEntity) {
@@ -36,5 +37,14 @@ public class KeyGroupService extends CommonService<KeyGroup, KeyGroupDto, KeyGro
 
         entity.setComment(keyGroupDto.getComment());
         return entity;
+    }
+
+    @Override
+    public KeyGroupDto save(KeyGroupDto keyGroupDto) {
+        if (keyGroupRepository.findByNumber(keyGroupDto.getNumber()).isPresent()) {
+            throw new NumberAlreadyExistException();
+        } else {
+            return super.save(keyGroupDto);
+        }
     }
 }
