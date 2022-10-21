@@ -53,7 +53,7 @@ public class KeyController {
 
     @PutMapping("/key")
     @Tag(name = "Ключи")
-    @Operation (summary = "Изменить информацию о ключе в БД")
+    @Operation (summary = "Изменить информацию о ключе в БД", description = "Сюда нужно так же передавать ID изменяемой записи")
     public KeyDto editKey(@RequestBody KeyDto keyDto) {
         return keyService.update(keyDto);
     }
@@ -82,7 +82,7 @@ public class KeyController {
 
     @PutMapping("/key-group")
     @Tag(name = "Группы")
-    @Operation (summary = "Изменить информацию о группе в БД")
+    @Operation (summary = "Изменить информацию о группе в БД", description = "Сюда нужно так же передавать ID изменяемой записи")
     public KeyGroupDto editKeyGroup(@RequestBody KeyGroupDto keyGroupDto) {
         return keyGroupService.update(keyGroupDto);
     }
@@ -112,7 +112,7 @@ public class KeyController {
 
     @PutMapping("/key-type")
     @Tag(name = "Типы ключей")
-    @Operation (summary = "Изменить информацию о типе ключа в БД")
+    @Operation (summary = "Изменить информацию о типе ключа в БД", description = "Сюда нужно так же передавать ID изменяемой записи")
     public KeyTypeDto editKeyType(@RequestBody KeyTypeDto keyTypeDto) {
         return keyTypeService.update(keyTypeDto);
     }
@@ -142,7 +142,7 @@ public class KeyController {
 
     @PutMapping("/partner")
     @Tag(name = "Контрагенты")
-    @Operation (summary = "Изменить информацию о контрагенте в БД")
+    @Operation (summary = "Изменить информацию о контрагенте в БД", description = "Сюда нужно так же передавать ID изменяемой записи")
     public PartnerDto editPartner(@RequestBody PartnerDto partnerDto) {
         return partnerService.update(partnerDto);
     }
@@ -172,7 +172,7 @@ public class KeyController {
 
     @PutMapping("/returns")
     @Tag(name = "Возвраты")
-    @Operation (summary = "Изменить информацию о возврате в БД")
+    @Operation (summary = "Изменить информацию о возврате в БД", description = "Сюда нужно так же передавать ID изменяемой записи")
     public ReturnDto editReturn(@RequestBody ReturnDto returnDto) {
         return returnService.update(returnDto);
     }
@@ -202,7 +202,7 @@ public class KeyController {
 
     @PutMapping("/sale")
     @Tag(name = "Продажи")
-    @Operation (summary = "Изменить информацию о продаже в БД")
+    @Operation (summary = "Изменить информацию о продаже в БД", description = "Сюда нужно так же передавать ID изменяемой записи")
     public SaleDto editSale(@RequestBody SaleDto saleDto) {
         return saleService.update(saleDto);
     }
@@ -232,7 +232,7 @@ public class KeyController {
 
     @PutMapping("/software")
     @Tag(name = "Типы программного обеспечения")
-    @Operation (summary = "Изменить тип ПО")
+    @Operation (summary = "Изменить тип ПО", description = "Сюда нужно так же передавать ID изменяемой записи")
     public SoftwareDto editSoftware(@RequestBody SoftwareDto softwareDto) {
         return softwareService.update(softwareDto);
     }
