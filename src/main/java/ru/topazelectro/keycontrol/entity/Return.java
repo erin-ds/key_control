@@ -15,7 +15,7 @@ public class Return extends CommonEntity{
 
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="sale_id", referencedColumnName = "id", updatable = false, insertable = true)
+    @JoinColumn(name="sale_id", referencedColumnName = "id", updatable = false)
     private Sale saleEntity;
 
     @Column(name = "date_plan")

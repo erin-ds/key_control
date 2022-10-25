@@ -19,19 +19,19 @@ public class Sale extends CommonEntity{
     private LocalDateTime date;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "partner_id", referencedColumnName = "id", insertable = true, updatable = false)
+    @JoinColumn(name = "partner_id", referencedColumnName = "id")
     private Partner partnerEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "partner_id_end_user", referencedColumnName = "id", insertable = true, updatable = false)
+    @JoinColumn(name = "partner_id_end_user", referencedColumnName = "id")
     private Partner partnerEntityEndUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "software_id", referencedColumnName = "id", insertable = true, updatable = false)
+    @JoinColumn(name = "software_id", referencedColumnName = "id")
     private Software softwareEntity;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "key_id", referencedColumnName = "id", insertable = true, updatable = false)
+    @JoinColumn(name = "key_id", referencedColumnName = "id")
     private Key keyEntity;
 
     @Column(name = "flash_number")
@@ -53,7 +53,7 @@ public class Sale extends CommonEntity{
     private int licensePaktan;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "key_group_id", referencedColumnName = "id", insertable = true, updatable = false)
+    @JoinColumn(name = "key_group_id", referencedColumnName = "id")
     private KeyGroup keyGroupEntity;
 
     @Column(name = "is_return")
