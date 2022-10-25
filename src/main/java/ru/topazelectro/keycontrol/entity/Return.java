@@ -9,7 +9,6 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@RequiredArgsConstructor
 @Table(name = "returns")
 public class Return extends CommonEntity{
 
@@ -30,7 +29,7 @@ public class Return extends CommonEntity{
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Return that = (Return) o;
-        return id != null && Objects.equals(id, that.id);
+        return getId() != null && Objects.equals(getId(), that.getId());
     }
 
     @Override

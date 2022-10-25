@@ -15,10 +15,10 @@ public abstract class CommonEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    Long id;
+    private Long id;
 
     @Column(name = "comment")
-    String comment;
+    private String comment;
 
     @Override
     public boolean equals(Object o) {

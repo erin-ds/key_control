@@ -14,9 +14,9 @@ import java.util.Objects;
 public abstract class CommonDto implements Serializable {
 
     @Schema(description = "Идентификатор записи", accessMode = Schema.AccessMode.READ_ONLY)
-    Long id;
+    private Long id;
     @Schema(description = "Комментарий к записи")
-    String comment;
+    private String comment;
 
     @Override
     public boolean equals(Object o) {

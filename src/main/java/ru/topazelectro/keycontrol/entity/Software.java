@@ -8,7 +8,6 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@RequiredArgsConstructor
 @Table(name = "software")
 public class Software extends CommonEntity{
 
@@ -20,7 +19,7 @@ public class Software extends CommonEntity{
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Software that = (Software) o;
-        return id != null && Objects.equals(id, that.id);
+        return getId() != null && Objects.equals(getId(), that.getId());
     }
 
     @Override

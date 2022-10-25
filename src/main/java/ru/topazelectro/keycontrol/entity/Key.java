@@ -8,7 +8,6 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
 @Entity
 @Table(name = "keys")
 public class Key extends CommonEntity {
@@ -28,7 +27,7 @@ public class Key extends CommonEntity {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Key keyEntity = (Key) o;
-        return id != null && Objects.equals(id, keyEntity.id);
+        return getId() != null && Objects.equals(getId(), keyEntity.getId());
     }
 
     @Override

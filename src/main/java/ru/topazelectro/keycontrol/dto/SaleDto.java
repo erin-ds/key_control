@@ -27,23 +27,23 @@ public class SaleDto extends CommonDto {
     @Schema(description = "ID ключа")
     private Long keyId;
     @Schema(description = "Номер флешки с ПО")
-    private int flashNumber;
+    private Integer flashNumber;
     @Schema(description = "Лицензия расчётного центра")
-    private int licenseCashless;
+    private Integer licenseCashless;
     @Schema(description = "Лицензия дисконтного центра")
-    private int licenseDiscount;
+    private Integer licenseDiscount;
     @Schema(description = "Лицензия отчётного центра")
-    private int licenseReport;
+    private Integer licenseReport;
     @Schema(description = "Лицензия личного кабинета РЦ")
-    private int licenseCabinet;
+    private Integer licenseCabinet;
     @Schema(description = "Лицензия автоналива")
-    private int licensePaktan;
+    private Integer licensePaktan;
     @Schema(description = "ID группы")
     private Long keyGroupId;
     @Schema(description = "Вернули\\Не вернули")
-    private boolean returned;
+    private Boolean returned;
     @Schema(description = "Номер заказа")
-    private int orderNumber;
+    private Integer orderNumber;
     @Schema(description = "Номер счета")
-    private int billNumber;
+    private Integer billNumber;
 }
