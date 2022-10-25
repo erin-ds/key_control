@@ -59,7 +59,7 @@ public class SaleService extends CommonService<Sale, SaleDto, SaleRepository> {
         entity.setLicenseCabinet(saleDto.getLicenseCabinet());
         entity.setLicensePaktan(saleDto.getLicensePaktan());
         entity.setKeyGroupEntity(keyGroupService.findByIdForMapping(saleDto.getKeyGroupId()).get());
-        entity.setReturn(saleDto.isReturned());
+        entity.setReturn(saleDto.getReturned());
         entity.setOrderNumber(saleDto.getOrderNumber());
         entity.setBillNumber(saleDto.getBillNumber());
         entity.setId(saleDto.getId());
