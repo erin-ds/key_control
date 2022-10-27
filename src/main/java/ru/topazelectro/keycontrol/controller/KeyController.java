@@ -3,9 +3,14 @@ package ru.topazelectro.keycontrol.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.topazelectro.keycontrol.dto.*;
-import ru.topazelectro.keycontrol.service.*;
+import ru.topazelectro.keycontrol.dto.KeyDto;
+import ru.topazelectro.keycontrol.exceptions.EmptyOrNonExistingIdException;
+import ru.topazelectro.keycontrol.exceptions.IdNotFoundException;
+import ru.topazelectro.keycontrol.exceptions.IdNotNullException;
+import ru.topazelectro.keycontrol.service.KeyService;
 
 import javax.inject.Inject;
 
@@ -27,22 +32,33 @@ public class KeyController {
     @GetMapping("/key")
     @Tag(name = "Ключи")
     @Operation(summary = "Получить ключ по ID")
-    public KeyDto getKeyById(@RequestParam Long id) {
-        return keyService.getById(id);
+    public ResponseEntity<?> getKeyById(@RequestParam Long id) throws IdNotFoundException {
+        try {
+            return new ResponseEntity<>(keyService.getById(id), HttpStatus.OK);
+        } catch (IdNotFoundException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping("/key")
     @Tag(name = "Ключи")
     @Operation(summary = "Сохранить новый ключ в БД")
-    public KeyDto saveKey(@RequestBody KeyDto keyDto) {
-        return keyService.save(keyDto);
+    public ResponseEntity<?> saveKey(@RequestBody KeyDto keyDto) throws IdNotNullException {
+        try {
+            return new ResponseEntity<>(keyService.save(keyDto), HttpStatus.OK);
+        } catch (IdNotNullException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PutMapping("/key")
     @Tag(name = "Ключи")
     @Operation(summary = "Изменить информацию о ключе в БД", description = "Сюда нужно так же передавать ID изменяемой записи")
-    public KeyDto editKey(@RequestBody KeyDto keyDto) {
-        return keyService.update(keyDto);
+    public ResponseEntity<?> editKey(@RequestBody KeyDto keyDto) throws EmptyOrNonExistingIdException {
+        try {
+            return new ResponseEntity<>(keyService.update(keyDto), HttpStatus.OK);
+        } catch (EmptyOrNonExistingIdException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
-
 }

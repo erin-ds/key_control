@@ -3,9 +3,15 @@ package ru.topazelectro.keycontrol.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.topazelectro.keycontrol.dto.*;
-import ru.topazelectro.keycontrol.service.*;
+import ru.topazelectro.keycontrol.dto.KeyGroupDto;
+import ru.topazelectro.keycontrol.exceptions.EmptyOrNonExistingIdException;
+import ru.topazelectro.keycontrol.exceptions.IdNotFoundException;
+import ru.topazelectro.keycontrol.exceptions.IdNotNullException;
+import ru.topazelectro.keycontrol.exceptions.NumberAlreadyExistException;
+import ru.topazelectro.keycontrol.service.KeyGroupService;
 
 import javax.inject.Inject;
 
@@ -28,22 +34,34 @@ public class KeyGroupController {
     @GetMapping("/key-group")
     @Tag(name = "Группы")
     @Operation(summary = "Получить группу по ID")
-    public KeyGroupDto getKeyGroupById(@RequestParam Long id) {
-        return keyGroupService.getById(id);
+    public ResponseEntity<?> getKeyGroupById(@RequestParam Long id) throws IdNotFoundException {
+        try {
+            return new ResponseEntity<>(keyGroupService.getById(id), HttpStatus.OK);
+        } catch (IdNotFoundException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping("/key-group")
     @Tag(name = "Группы")
     @Operation(summary = "Сохранить новую группу в БД")
-    public KeyGroupDto saveKeyGroup(@RequestBody KeyGroupDto keyGroupDto) {
-        return keyGroupService.save(keyGroupDto);
+    public ResponseEntity<?> saveKeyGroup(@RequestBody KeyGroupDto keyGroupDto) throws IdNotNullException, NumberAlreadyExistException {
+        try {
+            return new ResponseEntity<>(keyGroupService.save(keyGroupDto), HttpStatus.OK);
+        } catch (NumberAlreadyExistException | IdNotNullException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PutMapping("/key-group")
     @Tag(name = "Группы")
     @Operation(summary = "Изменить информацию о группе в БД", description = "Сюда нужно так же передавать ID изменяемой записи")
-    public KeyGroupDto editKeyGroup(@RequestBody KeyGroupDto keyGroupDto) {
-        return keyGroupService.update(keyGroupDto);
+    public ResponseEntity<?> editKeyGroup(@RequestBody KeyGroupDto keyGroupDto) throws EmptyOrNonExistingIdException {
+        try {
+            return new ResponseEntity<>(keyGroupService.update(keyGroupDto), HttpStatus.OK);
+        } catch (EmptyOrNonExistingIdException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
 }

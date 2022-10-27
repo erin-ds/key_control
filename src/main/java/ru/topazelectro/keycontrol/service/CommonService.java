@@ -30,7 +30,7 @@ public abstract class CommonService<KEY_CONTROL extends CommonEntity, KEY_CONTRO
 
     public Page<KEY_CONTROL_DTO> getAllEntities(int page, int listSize) {
         Pageable pageable = PageRequest.of(page - 1, listSize);
-       List<KEY_CONTROL_DTO> dtoList = repository
+        List<KEY_CONTROL_DTO> dtoList = repository
                 .findAll(pageable)
                 .stream()
                 .map(this::toDTO)
@@ -40,7 +40,11 @@ public abstract class CommonService<KEY_CONTROL extends CommonEntity, KEY_CONTRO
     }
 
     public KEY_CONTROL_DTO getById(Long id) {
-        return toDTO(repository.findById(id).orElseThrow(() -> new IdNotFoundException()));
+        if (id == null) {
+            throw new RuntimeException("Id не должен быть null");
+        } else {
+            return toDTO(repository.findById(id).orElseThrow(() -> new IdNotFoundException(id)));
+        }
     }
 
     public KEY_CONTROL_DTO save(KEY_CONTROL_DTO dto) {
