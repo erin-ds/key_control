@@ -13,3 +13,5 @@ databaseChangeLog:
       file: db/changelog/changeset/create-sales-table.yaml
   - include:
       file: db/changelog/changeset/create-returns-table.yaml
+  - include:
+      file: db/changelog/changeset/create-remote-update-table.yaml
