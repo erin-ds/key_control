@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-remote-update-table
+      author: Pavel Polyanskiy
+      changes:
+        - createTable:
+            tableName: remote_update
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: key_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_date
+                  type: datetime
+              - column:
+                  name: bill_number
+                  type: int
+              - column:
+                  name: order_number
+                  type: int
+              - column:
+                  name: comment
+                  type: varchar(250)
+        - addForeignKeyConstraint:
+            baseTableName: remote_update
+            baseColumnNames: key_id
+            referencedTableName: keys
+            referencedColumnNames: id
+            constraintName: remote_update_key_id_fk
