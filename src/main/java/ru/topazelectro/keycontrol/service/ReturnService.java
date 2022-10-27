@@ -14,14 +14,14 @@ public class ReturnService extends CommonService<Return, ReturnDto, ReturnReposi
     SaleService saleService;
 
     @Override
-    public ReturnDto toDTO(Return returnEntity) {
+    public ReturnDto toDTO(Return aReturn) {
         ReturnDto dto = ReturnDto.builder()
-                .dateFact(returnEntity.getDateFact())
-                .datePlan(returnEntity.getDatePlan())
-                .saleId(returnEntity.getSaleEntity().getId())
+                .dateFact(aReturn.getDateFact())
+                .datePlan(aReturn.getDatePlan())
+                .saleId(aReturn.getSale().getId())
                 .build();
-        dto.setId(returnEntity.getId());
-        dto.setComment(returnEntity.getComment());
+        dto.setId(aReturn.getId());
+        dto.setComment(aReturn.getComment());
         return dto;
     }
 
@@ -32,7 +32,7 @@ public class ReturnService extends CommonService<Return, ReturnDto, ReturnReposi
         entity.setComment(returnDto.getComment());
         entity.setDateFact(returnDto.getDateFact());
         entity.setDatePlan(returnDto.getDatePlan());
-        entity.setSaleEntity(saleService.findByIdForMapping(returnDto.getSaleId()).get());
+        entity.setSale(saleService.findByIdForMapping(returnDto.getSaleId()).get());
         return entity;
     }
 }

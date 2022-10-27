@@ -19,7 +19,7 @@ public class KeyGroup extends CommonEntity{
 
     @ManyToOne
     @JoinColumn(name = "partner_id", referencedColumnName = "id")
-    private Partner partnerEntity;
+    private Partner partner;
 
 
     @Override

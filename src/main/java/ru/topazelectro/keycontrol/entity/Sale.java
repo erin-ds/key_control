@@ -3,9 +3,7 @@ package ru.topazelectro.keycontrol.entity;
 import lombok.*;
 import org.hibernate.Hibernate;
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -19,19 +17,19 @@ public class Sale extends CommonEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "partner_id", referencedColumnName = "id")
-    private Partner partnerEntity;
+    private Partner partner;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "partner_id_end_user", referencedColumnName = "id")
-    private Partner partnerEntityEndUser;
+    private Partner partnerEndUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "software_id", referencedColumnName = "id")
-    private Software softwareEntity;
+    private Software software;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "key_id", referencedColumnName = "id")
-    private Key keyEntity;
+    private Key key;
 
     @Column(name = "flash_number")
     private int flashNumber;
@@ -53,7 +51,7 @@ public class Sale extends CommonEntity{
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "key_group_id", referencedColumnName = "id")
-    private KeyGroup keyGroupEntity;
+    private KeyGroup keyGroup;
 
     @Column(name = "is_return")
     private boolean isReturn;

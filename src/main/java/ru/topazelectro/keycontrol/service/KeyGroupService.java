@@ -18,20 +18,20 @@ public class KeyGroupService extends CommonService<KeyGroup, KeyGroupDto, KeyGro
     KeyGroupRepository keyGroupRepository;
 
     @Override
-    public KeyGroupDto toDTO(KeyGroup keyGroupEntity) {
+    public KeyGroupDto toDTO(KeyGroup keyGroup) {
         KeyGroupDto dto = KeyGroupDto.builder()
-                .number(keyGroupEntity.getNumber())
-                .partnerId(keyGroupEntity.getPartnerEntity().getId())
+                .number(keyGroup.getNumber())
+                .partnerId(keyGroup.getPartner().getId())
                 .build();
-        dto.setId(keyGroupEntity.getId());
-        dto.setComment(keyGroupEntity.getComment());
+        dto.setId(keyGroup.getId());
+        dto.setComment(keyGroup.getComment());
         return dto;
     }
 
     @Override
     public KeyGroup fromDTO(KeyGroupDto keyGroupDto) {
         KeyGroup entity = findByIdForMapping(keyGroupDto.getId()).orElse(new KeyGroup());
-        entity.setPartnerEntity(partnerService.findByIdForMapping(keyGroupDto.getPartnerId()).get());
+        entity.setPartner(partnerService.findByIdForMapping(keyGroupDto.getPartnerId()).get());
         entity.setId(keyGroupDto.getId());
         entity.setNumber(keyGroupDto.getNumber());
 

@@ -15,10 +15,10 @@ public class SoftwareService extends CommonService<Software, SoftwareDto, Softwa
     SoftwareRepository softwareRepository;
 
     @Override
-    public SoftwareDto toDTO(Software softwareEntity) {
-        SoftwareDto dto = SoftwareDto.builder().name(softwareEntity.getName()).build();
-        dto.setId(softwareEntity.getId());
-        dto.setComment(softwareEntity.getComment());
+    public SoftwareDto toDTO(Software software) {
+        SoftwareDto dto = SoftwareDto.builder().name(software.getName()).build();
+        dto.setId(software.getId());
+        dto.setComment(software.getComment());
         return dto;
     }
 

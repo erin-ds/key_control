@@ -5,5 +5,5 @@ import org.springframework.data.repository.NoRepositoryBean;
 import ru.topazelectro.keycontrol.entity.CommonEntity;
 
 @NoRepositoryBean
-public interface CommonRepository<KEY_CONTROL_ENTITY extends CommonEntity> extends JpaRepository<KEY_CONTROL_ENTITY, Long> {
+public interface CommonRepository<KEY_CONTROL extends CommonEntity> extends JpaRepository<KEY_CONTROL, Long> {
 }

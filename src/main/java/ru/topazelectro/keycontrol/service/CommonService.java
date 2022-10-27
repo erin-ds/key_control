@@ -17,12 +17,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public abstract class CommonService<KEY_CONTROL_ENTITY extends CommonEntity, KEY_CONTROL_DTO extends CommonDto, REPOSITORY extends CommonRepository<KEY_CONTROL_ENTITY>> {
+public abstract class CommonService<KEY_CONTROL extends CommonEntity, KEY_CONTROL_DTO extends CommonDto, REPOSITORY extends CommonRepository<KEY_CONTROL>> {
 
     @Inject
     private REPOSITORY repository;
 
-    public Optional<KEY_CONTROL_ENTITY> findByIdForMapping(Long id) {
+    public Optional<KEY_CONTROL> findByIdForMapping(Long id) {
         if (id == null) return Optional.empty();
         return repository.findById(id);
     }
@@ -45,7 +45,7 @@ public abstract class CommonService<KEY_CONTROL_ENTITY extends CommonEntity, KEY
 
     public KEY_CONTROL_DTO save(KEY_CONTROL_DTO dto) {
         if (dto.getId() == null) {
-            KEY_CONTROL_ENTITY entity = fromDTO(dto);
+            KEY_CONTROL entity = fromDTO(dto);
             return toDTO(repository.save(entity));
         } else {
             throw new IdNotNullException();
@@ -56,12 +56,12 @@ public abstract class CommonService<KEY_CONTROL_ENTITY extends CommonEntity, KEY
         if (dto.getId() == null || !repository.existsById(dto.getId())) {
             throw new EmptyOrNonExistingIdException();
         } else {
-            KEY_CONTROL_ENTITY entity = fromDTO(dto);
+            KEY_CONTROL entity = fromDTO(dto);
             return toDTO(repository.save(entity));
         }
     }
 
-    abstract KEY_CONTROL_DTO toDTO(KEY_CONTROL_ENTITY keyControlEntity);
+    abstract KEY_CONTROL_DTO toDTO(KEY_CONTROL keyControl);
 
-    abstract KEY_CONTROL_ENTITY fromDTO(KEY_CONTROL_DTO keyControlDto);
+    abstract KEY_CONTROL fromDTO(KEY_CONTROL_DTO keyControlDto);
 }

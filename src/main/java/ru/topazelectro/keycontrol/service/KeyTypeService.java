@@ -15,12 +15,12 @@ public class KeyTypeService extends CommonService<KeyType, KeyTypeDto, KeyTypeRe
     KeyTypeRepository keyTypeRepository;
 
     @Override
-    public KeyTypeDto toDTO(KeyType keyTypeEntity) {
+    public KeyTypeDto toDTO(KeyType keyType) {
         KeyTypeDto dto = KeyTypeDto.builder()
-                .name(keyTypeEntity.getName())
+                .name(keyType.getName())
                 .build();
-        dto.setId(keyTypeEntity.getId());
-        dto.setComment(keyTypeEntity.getComment());
+        dto.setId(keyType.getId());
+        dto.setComment(keyType.getComment());
         return dto;
     }
 

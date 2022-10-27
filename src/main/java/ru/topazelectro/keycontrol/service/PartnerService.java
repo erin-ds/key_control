@@ -15,13 +15,13 @@ public class PartnerService extends CommonService<Partner, PartnerDto, PartnerRe
     PartnerRepository partnerRepository;
 
     @Override
-    public PartnerDto toDTO(Partner partnerEntity) {
+    public PartnerDto toDTO(Partner partner) {
         PartnerDto dto = PartnerDto.builder()
-                .name(partnerEntity.getName())
-                .city(partnerEntity.getCity())
+                .name(partner.getName())
+                .city(partner.getCity())
                 .build();
-        dto.setId(partnerEntity.getId());
-        dto.setComment(partnerEntity.getComment());
+        dto.setId(partner.getId());
+        dto.setComment(partner.getComment());
         return dto;
     }
 

@@ -15,21 +15,21 @@ public class KeyService extends CommonService<Key, KeyDto, KeyRepository> {
     KeyTypeService keyTypeService;
 
     @Override
-    public KeyDto toDTO(Key keyEntity) {
+    public KeyDto toDTO(Key key) {
         KeyDto dto = KeyDto.builder()
-                .typeId(keyEntity.getKeyTypeEntity().getId())
-                .numberDec(keyEntity.getNumberDec())
-                .numberHex(keyEntity.getNumberHex())
+                .typeId(key.getKeyType().getId())
+                .numberDec(key.getNumberDec())
+                .numberHex(key.getNumberHex())
                 .build();
-        dto.setId(keyEntity.getId());
-        dto.setComment(keyEntity.getComment());
+        dto.setId(key.getId());
+        dto.setComment(key.getComment());
         return dto;
     }
 
     @Override
     public Key fromDTO(KeyDto keyDto) {
         Key entity = findByIdForMapping(keyDto.getId()).orElse(new Key());
-        entity.setKeyTypeEntity(keyTypeService.findByIdForMapping(keyDto.getTypeId()).get());
+        entity.setKeyType(keyTypeService.findByIdForMapping(keyDto.getTypeId()).get());
         entity.setNumberHex(keyDto.getNumberHex());
         entity.setNumberDec(keyDto.getNumberDec());
         entity.setId(keyDto.getId());
