@@ -7,10 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.topazelectro.keycontrol.dto.RemoteUpdateDto;
-import ru.topazelectro.keycontrol.exceptions.EmptyOrNonExistingIdException;
-import ru.topazelectro.keycontrol.exceptions.IdNotFoundException;
-import ru.topazelectro.keycontrol.exceptions.IdNotNullException;
-import ru.topazelectro.keycontrol.exceptions.PartnerAlreadyExistException;
+import ru.topazelectro.keycontrol.exceptions.*;
 import ru.topazelectro.keycontrol.service.RemoteUpdateService;
 
 import javax.inject.Inject;
@@ -45,10 +42,10 @@ public class RemoteUpdateController {
     @PostMapping("/remote-update")
     @Tag(name = "Удалённая прошивка")
     @Operation(summary = "Сохранить новую информацию о статусе удалённой прошивке в БД")
-    public ResponseEntity<?> saveRemoteUpdate(@RequestBody RemoteUpdateDto remoteUpdateDto) throws IdNotNullException {
+    public ResponseEntity<?> saveRemoteUpdate(@RequestBody RemoteUpdateDto remoteUpdateDto) throws IdNotNullException, KeyNotExistException {
         try {
             return new ResponseEntity<>(remoteUpdateService.save(remoteUpdateDto), HttpStatus.OK);
-        } catch (IdNotNullException e) {
+        } catch (KeyNotExistException | IdNotNullException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }

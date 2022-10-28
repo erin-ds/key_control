@@ -44,7 +44,8 @@ public class SaleController {
     public ResponseEntity<?> saveSale(@RequestBody SaleDto saleDto) throws IdNotNullException, PartnerNotExistException, SoftwareNotExistException, KeyNotExistException, KeyGroupNotExistException {
         try {
             return new ResponseEntity<>(saleService.save(saleDto), HttpStatus.OK);
-        } catch (PartnerNotExistException | SoftwareNotExistException | KeyNotExistException | KeyGroupNotExistException | IdNotNullException e) {
+        } catch (PartnerNotExistException | EndUserNotExistException | SoftwareNotExistException |
+                 KeyNotExistException | KeyGroupNotExistException | IdNotNullException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }

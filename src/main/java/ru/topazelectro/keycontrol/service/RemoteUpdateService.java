@@ -3,12 +3,13 @@ package ru.topazelectro.keycontrol.service;
 import org.springframework.stereotype.Service;
 import ru.topazelectro.keycontrol.dto.RemoteUpdateDto;
 import ru.topazelectro.keycontrol.entity.RemoteUpdate;
+import ru.topazelectro.keycontrol.exceptions.KeyNotExistException;
 import ru.topazelectro.keycontrol.repository.RemoteUpdateRepository;
 
 import javax.inject.Inject;
 
 @Service
-public class RemoteUpdateService extends CommonService <RemoteUpdate, RemoteUpdateDto, RemoteUpdateRepository> {
+public class RemoteUpdateService extends CommonService<RemoteUpdate, RemoteUpdateDto, RemoteUpdateRepository> {
 
     @Inject
     KeyService keyService;
@@ -38,4 +39,12 @@ public class RemoteUpdateService extends CommonService <RemoteUpdate, RemoteUpda
         return entity;
     }
 
+    @Override
+    public RemoteUpdateDto save(RemoteUpdateDto remoteUpdateDto) {
+        if (!keyService.findByIdForMapping(remoteUpdateDto.getKeyId()).isPresent()) {
+            throw new KeyNotExistException(remoteUpdateDto.getKeyId());
+        } else {
+            return super.save(remoteUpdateDto);
+        }
+    }
 }

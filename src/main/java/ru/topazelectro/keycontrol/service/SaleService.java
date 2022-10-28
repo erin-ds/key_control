@@ -3,10 +3,7 @@ package ru.topazelectro.keycontrol.service;
 import org.springframework.stereotype.Service;
 import ru.topazelectro.keycontrol.dto.SaleDto;
 import ru.topazelectro.keycontrol.entity.Sale;
-import ru.topazelectro.keycontrol.exceptions.KeyGroupNotExistException;
-import ru.topazelectro.keycontrol.exceptions.KeyNotExistException;
-import ru.topazelectro.keycontrol.exceptions.PartnerNotExistException;
-import ru.topazelectro.keycontrol.exceptions.SoftwareNotExistException;
+import ru.topazelectro.keycontrol.exceptions.*;
 import ru.topazelectro.keycontrol.repository.SaleRepository;
 
 import javax.inject.Inject;
@@ -74,6 +71,8 @@ public class SaleService extends CommonService<Sale, SaleDto, SaleRepository> {
     public SaleDto save(SaleDto saleDto) {
         if (!partnerService.findByIdForMapping(saleDto.getPartnerId()).isPresent()) {
             throw new PartnerNotExistException(saleDto.getPartnerId());
+        } else if (!partnerService.findByIdForMapping(saleDto.getPartnerIdEndUser()).isPresent()) {
+            throw new EndUserNotExistException(saleDto.getPartnerIdEndUser());
         } else if (!softwareService.findByIdForMapping(saleDto.getSoftwareId()).isPresent()) {
             throw new SoftwareNotExistException(saleDto.getSoftwareId());
         } else if (!keyService.findByIdForMapping(saleDto.getKeyId()).isPresent()) {
