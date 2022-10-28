@@ -7,10 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.topazelectro.keycontrol.dto.ReturnDto;
-import ru.topazelectro.keycontrol.exceptions.EmptyOrNonExistingIdException;
-import ru.topazelectro.keycontrol.exceptions.IdNotFoundException;
-import ru.topazelectro.keycontrol.exceptions.IdNotNullException;
-import ru.topazelectro.keycontrol.exceptions.PartnerAlreadyExistException;
+import ru.topazelectro.keycontrol.exceptions.*;
 import ru.topazelectro.keycontrol.service.ReturnService;
 
 import javax.inject.Inject;
@@ -44,10 +41,10 @@ public class ReturnController {
     @PostMapping("/returns")
     @Tag(name = "Возвраты")
     @Operation(summary = "Сохранить новую информацию о возврате в БД")
-    public ResponseEntity<?> saveReturn(@RequestBody ReturnDto returnDto) throws IdNotNullException {
+    public ResponseEntity<?> saveReturn(@RequestBody ReturnDto returnDto) throws IdNotNullException, SaleNotExistException {
         try {
             return new ResponseEntity<>(returnService.save(returnDto), HttpStatus.OK);
-        } catch (PartnerAlreadyExistException | IdNotNullException e) {
+        } catch (SaleNotExistException | IdNotNullException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }

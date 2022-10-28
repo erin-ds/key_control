@@ -7,10 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.topazelectro.keycontrol.dto.KeyGroupDto;
-import ru.topazelectro.keycontrol.exceptions.EmptyOrNonExistingIdException;
-import ru.topazelectro.keycontrol.exceptions.IdNotFoundException;
-import ru.topazelectro.keycontrol.exceptions.IdNotNullException;
-import ru.topazelectro.keycontrol.exceptions.NumberAlreadyExistException;
+import ru.topazelectro.keycontrol.exceptions.*;
 import ru.topazelectro.keycontrol.service.KeyGroupService;
 
 import javax.inject.Inject;
@@ -34,10 +31,10 @@ public class KeyGroupController {
     @GetMapping("/key-group")
     @Tag(name = "Группы")
     @Operation(summary = "Получить группу по ID")
-    public ResponseEntity<?> getKeyGroupById(@RequestParam Long id) throws IdNotFoundException {
+    public ResponseEntity<?> getKeyGroupById(@RequestParam Long id) throws IdNotFoundException, PartnerNotExistException {
         try {
             return new ResponseEntity<>(keyGroupService.getById(id), HttpStatus.OK);
-        } catch (IdNotFoundException e) {
+        } catch (PartnerNotExistException |IdNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }

@@ -7,9 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.topazelectro.keycontrol.dto.SaleDto;
-import ru.topazelectro.keycontrol.exceptions.EmptyOrNonExistingIdException;
-import ru.topazelectro.keycontrol.exceptions.IdNotFoundException;
-import ru.topazelectro.keycontrol.exceptions.IdNotNullException;
+import ru.topazelectro.keycontrol.exceptions.*;
 import ru.topazelectro.keycontrol.service.SaleService;
 
 import javax.inject.Inject;
@@ -43,10 +41,10 @@ public class SaleController {
     @PostMapping("/sale")
     @Tag(name = "Продажи")
     @Operation(summary = "Сохранить новую продажу в БД")
-    public ResponseEntity<?> saveSale(@RequestBody SaleDto saleDto) throws IdNotNullException {
+    public ResponseEntity<?> saveSale(@RequestBody SaleDto saleDto) throws IdNotNullException, PartnerNotExistException, SoftwareNotExistException, KeyNotExistException, KeyGroupNotExistException {
         try {
             return new ResponseEntity<>(saleService.save(saleDto), HttpStatus.OK);
-        } catch (IdNotNullException e) {
+        } catch (PartnerNotExistException | SoftwareNotExistException | KeyNotExistException | KeyGroupNotExistException | IdNotNullException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
