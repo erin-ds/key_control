@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.topazelectro.keycontrol.dto.KeyGroupDto;
 import ru.topazelectro.keycontrol.entity.KeyGroup;
 import ru.topazelectro.keycontrol.exceptions.NumberAlreadyExistException;
+import ru.topazelectro.keycontrol.exceptions.PartnerNotExistException;
 import ru.topazelectro.keycontrol.repository.KeyGroupRepository;
 
 import javax.inject.Inject;
@@ -41,7 +42,9 @@ public class KeyGroupService extends CommonService<KeyGroup, KeyGroupDto, KeyGro
 
     @Override
     public KeyGroupDto save(KeyGroupDto keyGroupDto) {
-        if (keyGroupRepository.findByNumber(keyGroupDto.getNumber()).isPresent()) {
+        if (!partnerService.findByIdForMapping(keyGroupDto.getPartnerId()).isPresent()){
+            throw new PartnerNotExistException(keyGroupDto.getPartnerId());
+        } else if (keyGroupRepository.findByNumber(keyGroupDto.getNumber()).isPresent()) {
             throw new NumberAlreadyExistException();
         } else {
             return super.save(keyGroupDto);

@@ -3,6 +3,7 @@ package ru.topazelectro.keycontrol.service;
 import org.springframework.stereotype.Service;
 import ru.topazelectro.keycontrol.dto.ReturnDto;
 import ru.topazelectro.keycontrol.entity.Return;
+import ru.topazelectro.keycontrol.exceptions.SaleNotExistException;
 import ru.topazelectro.keycontrol.repository.ReturnRepository;
 
 import javax.inject.Inject;
@@ -34,5 +35,13 @@ public class ReturnService extends CommonService<Return, ReturnDto, ReturnReposi
         entity.setDatePlan(returnDto.getDatePlan());
         entity.setSale(saleService.findByIdForMapping(returnDto.getSaleId()).get());
         return entity;
+    }
+
+    @Override
+    public ReturnDto save(ReturnDto returnDto) {
+        if (!saleService.findByIdForMapping(returnDto.getSaleId()).isPresent()) {
+            throw new SaleNotExistException(returnDto.getSaleId());
+        }
+        return super.save(returnDto);
     }
 }

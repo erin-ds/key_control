@@ -3,6 +3,8 @@ package ru.topazelectro.keycontrol.service;
 import org.springframework.stereotype.Service;
 import ru.topazelectro.keycontrol.dto.KeyDto;
 import ru.topazelectro.keycontrol.entity.Key;
+import ru.topazelectro.keycontrol.exceptions.KeyTypeNotExistException;
+import ru.topazelectro.keycontrol.exceptions.NumberAlreadyExistException;
 import ru.topazelectro.keycontrol.repository.KeyRepository;
 
 import javax.inject.Inject;
@@ -13,6 +15,9 @@ public class KeyService extends CommonService<Key, KeyDto, KeyRepository> {
 
     @Inject
     KeyTypeService keyTypeService;
+
+    @Inject
+    KeyGroupService keyGroupService;
 
     @Override
     public KeyDto toDTO(Key key) {
@@ -35,5 +40,13 @@ public class KeyService extends CommonService<Key, KeyDto, KeyRepository> {
         entity.setId(keyDto.getId());
         entity.setComment(keyDto.getComment());
         return entity;
+    }
+
+    @Override
+    public KeyDto save(KeyDto keyDto) {
+        if (!keyTypeService.findByIdForMapping(keyDto.getTypeId()).isPresent()) {
+            throw new KeyTypeNotExistException(keyDto.getTypeId());
+        }
+        return super.save(keyDto);
     }
 }

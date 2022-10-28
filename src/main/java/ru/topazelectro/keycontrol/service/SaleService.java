@@ -3,6 +3,10 @@ package ru.topazelectro.keycontrol.service;
 import org.springframework.stereotype.Service;
 import ru.topazelectro.keycontrol.dto.SaleDto;
 import ru.topazelectro.keycontrol.entity.Sale;
+import ru.topazelectro.keycontrol.exceptions.KeyGroupNotExistException;
+import ru.topazelectro.keycontrol.exceptions.KeyNotExistException;
+import ru.topazelectro.keycontrol.exceptions.PartnerNotExistException;
+import ru.topazelectro.keycontrol.exceptions.SoftwareNotExistException;
 import ru.topazelectro.keycontrol.repository.SaleRepository;
 
 import javax.inject.Inject;
@@ -65,4 +69,20 @@ public class SaleService extends CommonService<Sale, SaleDto, SaleRepository> {
         entity.setComment(saleDto.getComment());
         return entity;
     }
+
+    @Override
+    public SaleDto save(SaleDto saleDto) {
+        if (!partnerService.findByIdForMapping(saleDto.getPartnerId()).isPresent()) {
+            throw new PartnerNotExistException(saleDto.getPartnerId());
+        } else if (!softwareService.findByIdForMapping(saleDto.getSoftwareId()).isPresent()) {
+            throw new SoftwareNotExistException(saleDto.getSoftwareId());
+        } else if (!keyService.findByIdForMapping(saleDto.getKeyId()).isPresent()) {
+            throw new KeyNotExistException(saleDto.getKeyId());
+        } else if (!keyGroupService.findByIdForMapping(saleDto.getKeyGroupId()).isPresent()) {
+            throw new KeyGroupNotExistException(saleDto.getKeyGroupId());
+        } else {
+            return super.save(saleDto);
+        }
+    }
+
 }
