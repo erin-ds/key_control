@@ -31,10 +31,10 @@ public class KeyGroupController {
     @GetMapping("/key-group")
     @Tag(name = "Группы")
     @Operation(summary = "Получить группу по ID")
-    public ResponseEntity<?> getKeyGroupById(@RequestParam Long id) throws IdNotFoundException, PartnerNotExistException {
+    public ResponseEntity<?> getKeyGroupById(@RequestParam Long id) throws IdNotFoundException {
         try {
             return new ResponseEntity<>(keyGroupService.getById(id), HttpStatus.OK);
-        } catch (PartnerNotExistException |IdNotFoundException e) {
+        } catch (IdNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
@@ -42,10 +42,10 @@ public class KeyGroupController {
     @PostMapping("/key-group")
     @Tag(name = "Группы")
     @Operation(summary = "Сохранить новую группу в БД")
-    public ResponseEntity<?> saveKeyGroup(@RequestBody KeyGroupDto keyGroupDto) throws IdNotNullException, NumberAlreadyExistException {
+    public ResponseEntity<?> saveKeyGroup(@RequestBody KeyGroupDto keyGroupDto) throws IdNotNullException, NumberAlreadyExistException, PartnerNotExistException {
         try {
             return new ResponseEntity<>(keyGroupService.save(keyGroupDto), HttpStatus.OK);
-        } catch (NumberAlreadyExistException | IdNotNullException e) {
+        } catch (PartnerNotExistException | NumberAlreadyExistException | IdNotNullException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
