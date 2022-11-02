@@ -5,9 +5,11 @@ spring:
     name: key-control
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/topazkeys
-    username: postgres
-    password: qwerty0
+    url: jdbc:postgresql://localhost:5432/topazkeys?ApplicationName=Key-Control
+    username: topaz
+    password: office
+    hikari:
+      maximum-pool-size: 3
   jpa:
     properties:
       hibernate:
@@ -21,3 +23,7 @@ liquibase:
 springdoc:
   swagger-ui:
     enabled: true
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.10.243:8761/eureka/
