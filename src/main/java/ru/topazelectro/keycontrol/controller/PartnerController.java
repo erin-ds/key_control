@@ -1,11 +1,16 @@
 package ru.topazelectro.keycontrol.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.topazelectro.keycontrol.dto.KeyTypeDto;
 import ru.topazelectro.keycontrol.dto.PartnerDto;
 import ru.topazelectro.keycontrol.exceptions.EmptyOrNonExistingIdException;
 import ru.topazelectro.keycontrol.exceptions.IdNotFoundException;
@@ -32,7 +37,13 @@ public class PartnerController {
 
     @GetMapping("/partner")
     @Tag(name = "Контрагенты")
-    @Operation(summary = "Получить контрагента по ID")
+    @Operation(summary = "Получить контрагента по ID", responses = {
+            @ApiResponse(content = {
+                    @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = PartnerDto.class))
+            })
+    })
     public ResponseEntity<?> getPartnerById(@RequestParam Long id) throws IdNotFoundException {
         try {
             return new ResponseEntity<>(partnerService.getById(id), HttpStatus.OK);
@@ -43,7 +54,13 @@ public class PartnerController {
 
     @PostMapping("/partner")
     @Tag(name = "Контрагенты")
-    @Operation(summary = "Сохранить нового контрагента в БД")
+    @Operation(summary = "Сохранить нового контрагента в БД", responses = {
+            @ApiResponse(content = {
+                    @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = PartnerDto.class))
+            })
+    })
     public ResponseEntity<?> savePartner(@RequestBody PartnerDto partnerDto) throws IdNotNullException, PartnerAlreadyExistException {
         try {
             return new ResponseEntity<>(partnerService.save(partnerDto), HttpStatus.OK);
@@ -54,7 +71,18 @@ public class PartnerController {
 
     @PutMapping("/partner")
     @Tag(name = "Контрагенты")
-    @Operation(summary = "Изменить информацию о контрагенте в БД", description = "Сюда нужно так же передавать ID изменяемой записи")
+    @Operation(summary = "Изменить информацию о контрагенте в БД", responses = {
+            @ApiResponse(content = {
+                    @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = PartnerDto.class))
+            })
+    })
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            required = true,
+            content = @Content(
+                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(example = "{ \"id\": 0, \"comment\": \"string\", \"name\": \"string\", \"city\": \"string\" }")))
     public ResponseEntity<?> editPartner(@RequestBody PartnerDto partnerDto) throws EmptyOrNonExistingIdException {
         try {
             return new ResponseEntity<>(partnerService.update(partnerDto), HttpStatus.OK);

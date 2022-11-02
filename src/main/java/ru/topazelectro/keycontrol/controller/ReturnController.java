@@ -1,11 +1,16 @@
 package ru.topazelectro.keycontrol.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.topazelectro.keycontrol.dto.PartnerDto;
 import ru.topazelectro.keycontrol.dto.ReturnDto;
 import ru.topazelectro.keycontrol.exceptions.*;
 import ru.topazelectro.keycontrol.service.ReturnService;
@@ -29,7 +34,13 @@ public class ReturnController {
 
     @GetMapping("/returns")
     @Tag(name = "Возвраты")
-    @Operation(summary = "Получить информацию о возврате по ID")
+    @Operation(summary = "Получить информацию о возврате по ID", responses = {
+            @ApiResponse(content = {
+                    @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ReturnDto.class))
+            })
+    })
     public ResponseEntity<?> getReturnById(@RequestParam Long id) throws IdNotFoundException {
         try {
             return new ResponseEntity<>(returnService.getById(id), HttpStatus.OK);
@@ -40,7 +51,13 @@ public class ReturnController {
 
     @PostMapping("/returns")
     @Tag(name = "Возвраты")
-    @Operation(summary = "Сохранить новую информацию о возврате в БД")
+    @Operation(summary = "Сохранить новую информацию о возврате в БД", responses = {
+            @ApiResponse(content = {
+                    @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ReturnDto.class))
+            })
+    })
     public ResponseEntity<?> saveReturn(@RequestBody ReturnDto returnDto) throws IdNotNullException, SaleNotExistException {
         try {
             return new ResponseEntity<>(returnService.save(returnDto), HttpStatus.OK);
@@ -51,7 +68,18 @@ public class ReturnController {
 
     @PutMapping("/returns")
     @Tag(name = "Возвраты")
-    @Operation(summary = "Изменить информацию о возврате в БД", description = "Сюда нужно так же передавать ID изменяемой записи")
+    @Operation(summary = "Изменить информацию о возврате в БД", responses = {
+            @ApiResponse(content = {
+                    @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ReturnDto.class))
+            })
+    })
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            required = true,
+            content = @Content(
+                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(example = "{ \"id\": 0, \"comment\": \"string\", \"name\": \"string\", \"city\": \"string\" }")))
     public ResponseEntity<?> editReturn(@RequestBody ReturnDto returnDto) throws EmptyOrNonExistingIdException {
         try {
             return new ResponseEntity<>(returnService.update(returnDto), HttpStatus.OK);

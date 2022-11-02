@@ -1,9 +1,13 @@
 package ru.topazelectro.keycontrol.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.topazelectro.keycontrol.dto.*;
@@ -32,7 +36,13 @@ public class SoftwareController {
 
     @GetMapping("/software")
     @Tag(name = "Типы программного обеспечения")
-    @Operation(summary = "Получить тип ПО по ID")
+    @Operation(summary = "Получить тип ПО по ID", responses = {
+            @ApiResponse(content = {
+                    @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = SoftwareDto.class))
+            })
+    })
     public ResponseEntity<?> getSoftwareById(@RequestParam Long id) throws IdNotFoundException {
         try {
             return new ResponseEntity<>(softwareService.getById(id), HttpStatus.OK);
@@ -43,7 +53,13 @@ public class SoftwareController {
 
     @PostMapping("/software")
     @Tag(name = "Типы программного обеспечения")
-    @Operation(summary = "Сохранить новый тип ПО в БД")
+    @Operation(summary = "Сохранить новый тип ПО в БД", responses = {
+            @ApiResponse(content = {
+                    @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = SoftwareDto.class))
+            })
+    })
     public ResponseEntity<?> saveSoftware(@RequestBody SoftwareDto softwareDto) throws IdNotNullException, SoftwareAlreadyExistException {
         try {
             return new ResponseEntity<>(softwareService.save(softwareDto), HttpStatus.OK);
@@ -54,7 +70,18 @@ public class SoftwareController {
 
     @PutMapping("/software")
     @Tag(name = "Типы программного обеспечения")
-    @Operation(summary = "Изменить тип ПО", description = "Сюда нужно так же передавать ID изменяемой записи")
+    @Operation(summary = "Изменить тип ПО", responses = {
+            @ApiResponse(content = {
+                    @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = SoftwareDto.class))
+            })
+    })
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            required = true,
+            content = @Content(
+                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(example = "{ \"id\": 0, \"comment\": \"string\", \"name\": \"string\" }")))
     public ResponseEntity<?> editSoftware(@RequestBody SoftwareDto softwareDto) throws EmptyOrNonExistingIdException {
         try {
             return new ResponseEntity<>(softwareService.update(softwareDto), HttpStatus.OK);

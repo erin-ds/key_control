@@ -1,11 +1,16 @@
 package ru.topazelectro.keycontrol.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.topazelectro.keycontrol.dto.KeyGroupDto;
 import ru.topazelectro.keycontrol.dto.KeyTypeDto;
 import ru.topazelectro.keycontrol.exceptions.EmptyOrNonExistingIdException;
 import ru.topazelectro.keycontrol.exceptions.IdNotFoundException;
@@ -32,7 +37,13 @@ public class KeyTypeController {
 
     @GetMapping("/key-type")
     @Tag(name = "Типы ключей")
-    @Operation(summary = "Получить тип ключа по ID")
+    @Operation(summary = "Получить тип ключа по ID", responses = {
+            @ApiResponse(content = {
+                    @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = KeyTypeDto.class))
+            })
+    })
     public ResponseEntity<?> getKeyType(@RequestParam Long id) throws IdNotFoundException {
         try {
             return new ResponseEntity<>(keyTypeService.getById(id), HttpStatus.OK);
@@ -43,7 +54,13 @@ public class KeyTypeController {
 
     @PostMapping("/key-type")
     @Tag(name = "Типы ключей")
-    @Operation(summary = "Сохранить новый тип ключа в БД")
+    @Operation(summary = "Сохранить новый тип ключа в БД", responses = {
+            @ApiResponse(content = {
+                    @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = KeyTypeDto.class))
+            })
+    })
     public ResponseEntity<?> saveKeyType(@RequestBody KeyTypeDto keyTypeDto) throws IdNotNullException, KeyTypeAlreadyExistException {
         try {
             return new ResponseEntity<>(keyTypeService.save(keyTypeDto), HttpStatus.OK);
@@ -54,7 +71,18 @@ public class KeyTypeController {
 
     @PutMapping("/key-type")
     @Tag(name = "Типы ключей")
-    @Operation(summary = "Изменить информацию о типе ключа в БД", description = "Сюда нужно так же передавать ID изменяемой записи")
+    @Operation(summary = "Изменить информацию о типе ключа в БД", responses = {
+            @ApiResponse(content = {
+                    @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = KeyTypeDto.class))
+            })
+    })
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            required = true,
+            content = @Content(
+                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(example = "{ \"id\": 0, \"comment\": \"string\", \"name\": \"string\" }")))
     public ResponseEntity<?> editKeyType(@RequestBody KeyTypeDto keyTypeDto) throws EmptyOrNonExistingIdException {
         try {
             return new ResponseEntity<>(keyTypeService.update(keyTypeDto), HttpStatus.OK);

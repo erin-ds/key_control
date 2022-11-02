@@ -1,9 +1,13 @@
 package ru.topazelectro.keycontrol.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.topazelectro.keycontrol.dto.KeyGroupDto;
@@ -30,7 +34,13 @@ public class KeyGroupController {
 
     @GetMapping("/key-group")
     @Tag(name = "Группы")
-    @Operation(summary = "Получить группу по ID")
+    @Operation(summary = "Получить группу по ID", responses = {
+            @ApiResponse(content = {
+                    @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = KeyGroupDto.class))
+            })
+    })
     public ResponseEntity<?> getKeyGroupById(@RequestParam Long id) throws IdNotFoundException {
         try {
             return new ResponseEntity<>(keyGroupService.getById(id), HttpStatus.OK);
@@ -41,7 +51,13 @@ public class KeyGroupController {
 
     @PostMapping("/key-group")
     @Tag(name = "Группы")
-    @Operation(summary = "Сохранить новую группу в БД")
+    @Operation(summary = "Сохранить новую группу в БД", responses = {
+            @ApiResponse(content = {
+                    @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = KeyGroupDto.class))
+            })
+    })
     public ResponseEntity<?> saveKeyGroup(@RequestBody KeyGroupDto keyGroupDto) throws IdNotNullException, NumberAlreadyExistException, PartnerNotExistException {
         try {
             return new ResponseEntity<>(keyGroupService.save(keyGroupDto), HttpStatus.OK);
@@ -52,7 +68,18 @@ public class KeyGroupController {
 
     @PutMapping("/key-group")
     @Tag(name = "Группы")
-    @Operation(summary = "Изменить информацию о группе в БД", description = "Сюда нужно так же передавать ID изменяемой записи")
+    @Operation(summary = "Изменить информацию о группе в БД", responses = {
+            @ApiResponse(content = {
+                    @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = KeyGroupDto.class))
+            })
+    })
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            required = true,
+            content = @Content(
+                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(example = "{ \"id\": 0, \"comment\": \"string\", \"number\": 0, \"partnerId\": 0 }")))
     public ResponseEntity<?> editKeyGroup(@RequestBody KeyGroupDto keyGroupDto) throws EmptyOrNonExistingIdException {
         try {
             return new ResponseEntity<>(keyGroupService.update(keyGroupDto), HttpStatus.OK);
