@@ -3,7 +3,15 @@ server:
 spring:
   application:
     name: key-control
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          lower-case-service-id: true
+          url-expression: "'lb:http://'+serviceId"
   datasource:
+    type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/topazkeys?ApplicationName=Key-Control
     username: topaz
