@@ -10,12 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.topazelectro.keycontrol.dto.PartnerDto;
 import ru.topazelectro.keycontrol.dto.SaleDto;
 import ru.topazelectro.keycontrol.exceptions.*;
 import ru.topazelectro.keycontrol.service.SaleService;
 
 import javax.inject.Inject;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/")
@@ -23,12 +23,20 @@ public class SaleController {
     @Inject
     SaleService saleService;
 
-    @GetMapping("/sale/all")
+    @GetMapping("/sale/all/pages/")
     @Tag(name = "Продажи", description = "Полная информация по продажам")
-    @Operation(summary = "Получить весь список продаж")
+    @Operation(summary = "Получить весь список продаж с пагинацией")
     public Page<SaleDto> getAllSales(@RequestParam(defaultValue = "1", required = false) int pageNumber,
                                      @RequestParam(defaultValue = "10", required = false) int listSize) {
         return saleService.getAllEntities(pageNumber, listSize);
+
+    }
+
+    @GetMapping("/sale/all/")
+    @Tag(name = "Продажи")
+    @Operation(summary = "Получить весь список продаж")
+    public List<SaleDto> getAll() {
+        return saleService.getAll();
 
     }
 

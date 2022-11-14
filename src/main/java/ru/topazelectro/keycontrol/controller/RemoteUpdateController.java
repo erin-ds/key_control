@@ -10,12 +10,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.topazelectro.keycontrol.dto.PartnerDto;
 import ru.topazelectro.keycontrol.dto.RemoteUpdateDto;
-import ru.topazelectro.keycontrol.exceptions.*;
+import ru.topazelectro.keycontrol.exceptions.EmptyOrNonExistingIdException;
+import ru.topazelectro.keycontrol.exceptions.IdNotFoundException;
+import ru.topazelectro.keycontrol.exceptions.IdNotNullException;
+import ru.topazelectro.keycontrol.exceptions.KeyNotExistException;
 import ru.topazelectro.keycontrol.service.RemoteUpdateService;
 
 import javax.inject.Inject;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/")
@@ -24,12 +27,20 @@ public class RemoteUpdateController {
     @Inject
     RemoteUpdateService remoteUpdateService;
 
-    @GetMapping("/remote-update/all")
+    @GetMapping("/remote-update/all/pages/")
     @Tag(name = "Удалённая прошивка", description = "Даты прошивок")
-    @Operation(summary = "Получить все данные о ключах которые подлежат или подлежали удалённой прошивке")
+    @Operation(summary = "Получить все данные о ключах которые подлежат или подлежали удалённой прошивке с пагинацией")
     public Page<RemoteUpdateDto> getAllRemoteUpdates(@RequestParam(defaultValue = "1", required = false) int pageNumber,
                                                      @RequestParam(defaultValue = "10", required = false) int listSize) {
         return remoteUpdateService.getAllEntities(pageNumber, listSize);
+
+    }
+
+    @GetMapping("/remote-update/all/")
+    @Tag(name = "Удалённая прошивка")
+    @Operation(summary = "Получить все данные о ключах которые подлежат или подлежали удалённой прошивке")
+    public List<RemoteUpdateDto> getAll() {
+        return remoteUpdateService.getAll();
 
     }
 

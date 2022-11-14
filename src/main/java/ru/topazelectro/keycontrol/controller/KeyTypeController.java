@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.topazelectro.keycontrol.dto.KeyGroupDto;
 import ru.topazelectro.keycontrol.dto.KeyTypeDto;
 import ru.topazelectro.keycontrol.exceptions.EmptyOrNonExistingIdException;
 import ru.topazelectro.keycontrol.exceptions.IdNotFoundException;
@@ -19,6 +18,7 @@ import ru.topazelectro.keycontrol.exceptions.KeyTypeAlreadyExistException;
 import ru.topazelectro.keycontrol.service.KeyTypeService;
 
 import javax.inject.Inject;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/")
@@ -26,12 +26,20 @@ public class KeyTypeController {
     @Inject
     KeyTypeService keyTypeService;
 
-    @GetMapping("/key-type/all")
+    @GetMapping("/key-type/all/pages/")
     @Tag(name = "Типы ключей", description = "Тип подключения (USB\\LPT), тип ключа (сетевой\\локальный)")
-    @Operation(summary = "Получить список всех типов ключей")
+    @Operation(summary = "Получить список всех типов ключей с пагинацией")
     public Page<KeyTypeDto> getAllKeyTypes(@RequestParam(defaultValue = "1", required = false) int pageNumber,
                                            @RequestParam(defaultValue = "10", required = false) int listSize) {
         return keyTypeService.getAllEntities(pageNumber, listSize);
+
+    }
+
+    @GetMapping("/key-type/all/")
+    @Tag(name = "Типы ключей")
+    @Operation(summary = "Получить список всех типов ключей")
+    public List<KeyTypeDto> getAll() {
+        return keyTypeService.getAll();
 
     }
 

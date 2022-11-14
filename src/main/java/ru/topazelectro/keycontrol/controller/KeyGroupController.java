@@ -15,6 +15,7 @@ import ru.topazelectro.keycontrol.exceptions.*;
 import ru.topazelectro.keycontrol.service.KeyGroupService;
 
 import javax.inject.Inject;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/")
@@ -24,12 +25,20 @@ public class KeyGroupController {
     KeyGroupService keyGroupService;
 
 
-    @GetMapping("/key-group/all")
+    @GetMapping("/key-group/pages/")
     @Tag(name = "Группы", description = "Работа с номерами групп")
-    @Operation(summary = "Получить список всех групп")
+    @Operation(summary = "Получить список всех групп с пагинацией")
     public Page<KeyGroupDto> getAllKeyGroups(@RequestParam(defaultValue = "1", required = false) int pageNumber,
                                              @RequestParam(defaultValue = "10", required = false) int listSize) {
         return keyGroupService.getAllEntities(pageNumber, listSize);
+    }
+
+    @GetMapping("/key-group/all/")
+    @Tag(name = "Группы")
+    @Operation(summary = "Получить список всех групп")
+    public List<KeyGroupDto> getAll() {
+        return keyGroupService.getAll();
+
     }
 
     @GetMapping("/key-group")

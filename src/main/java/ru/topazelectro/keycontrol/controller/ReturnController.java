@@ -10,12 +10,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.topazelectro.keycontrol.dto.PartnerDto;
 import ru.topazelectro.keycontrol.dto.ReturnDto;
-import ru.topazelectro.keycontrol.exceptions.*;
+import ru.topazelectro.keycontrol.exceptions.EmptyOrNonExistingIdException;
+import ru.topazelectro.keycontrol.exceptions.IdNotFoundException;
+import ru.topazelectro.keycontrol.exceptions.IdNotNullException;
+import ru.topazelectro.keycontrol.exceptions.SaleNotExistException;
 import ru.topazelectro.keycontrol.service.ReturnService;
 
 import javax.inject.Inject;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/")
@@ -23,12 +26,20 @@ public class ReturnController {
     @Inject
     ReturnService returnService;
 
-    @GetMapping("/returns/all")
+    @GetMapping("/returns/all/pages/")
     @Tag(name = "Возвраты", description = "Даты планируемого и фактического возврата")
-    @Operation(summary = "Получить весь список возвратов")
+    @Operation(summary = "Получить весь список возвратов с пагинацией")
     public Page<ReturnDto> getAllReturns(@RequestParam(defaultValue = "1", required = false) int pageNumber,
                                          @RequestParam(defaultValue = "10", required = false) int listSize) {
         return returnService.getAllEntities(pageNumber, listSize);
+
+    }
+
+    @GetMapping("/returns/all/")
+    @Tag(name = "Возвраты")
+    @Operation(summary = "Получить весь список возвратов")
+    public List<ReturnDto> getAll() {
+        return returnService.getAll();
 
     }
 

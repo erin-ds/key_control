@@ -18,6 +18,7 @@ import ru.topazelectro.keycontrol.exceptions.SoftwareAlreadyExistException;
 import ru.topazelectro.keycontrol.service.*;
 
 import javax.inject.Inject;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/")
@@ -25,12 +26,20 @@ public class SoftwareController {
     @Inject
     SoftwareService softwareService;
 
-    @GetMapping("/software/all")
+    @GetMapping("/software/all/pages/")
     @Tag(name = "Типы программного обеспечения", description = "Топаз-АСЗ, Топаз-Офис и т.д.")
-    @Operation(summary = "Получить весь список типов ПО")
+    @Operation(summary = "Получить весь список типов ПО с пагинацией")
     public Page<SoftwareDto> getAllSoftware(@RequestParam(defaultValue = "1", required = false) int pageNumber,
                                             @RequestParam(defaultValue = "10", required = false) int listSize) {
         return softwareService.getAllEntities(pageNumber, listSize);
+
+    }
+
+    @GetMapping("/software/all/")
+    @Tag(name = "Типы программного обеспечения")
+    @Operation(summary = "Получить весь список типов ПО")
+    public List<SoftwareDto> getAll() {
+        return softwareService.getAll();
 
     }
 

@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.topazelectro.keycontrol.dto.KeyTypeDto;
 import ru.topazelectro.keycontrol.dto.PartnerDto;
 import ru.topazelectro.keycontrol.exceptions.EmptyOrNonExistingIdException;
 import ru.topazelectro.keycontrol.exceptions.IdNotFoundException;
@@ -19,6 +18,7 @@ import ru.topazelectro.keycontrol.exceptions.PartnerAlreadyExistException;
 import ru.topazelectro.keycontrol.service.PartnerService;
 
 import javax.inject.Inject;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/")
@@ -26,12 +26,20 @@ public class PartnerController {
     @Inject
     PartnerService partnerService;
 
-    @GetMapping("/partner/all")
+    @GetMapping("/partner/all/pages/")
     @Tag(name = "Контрагенты", description = "Работа с контрагентами")
-    @Operation(summary = "Получить список всех контрагентов")
+    @Operation(summary = "Получить список всех контрагентов с пагинацией")
     public Page<PartnerDto> getAllPartners(@RequestParam(defaultValue = "1", required = false) int pageNumber,
                                            @RequestParam(defaultValue = "10", required = false) int listSize) {
         return partnerService.getAllEntities(pageNumber, listSize);
+
+    }
+
+    @GetMapping("/partner/all/")
+    @Tag(name = "Контрагенты")
+    @Operation(summary = "Получить список всех контрагентов")
+    public List<PartnerDto> getAll() {
+        return partnerService.getAll();
 
     }
 
