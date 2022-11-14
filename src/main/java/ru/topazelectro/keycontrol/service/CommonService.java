@@ -39,6 +39,14 @@ public abstract class CommonService<KEY_CONTROL extends CommonEntity, KEY_CONTRO
 
     }
 
+    public List<KEY_CONTROL_DTO> getAll() {
+        return repository
+                .findAll()
+                .stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+    }
+
     public KEY_CONTROL_DTO getById(Long id) {
         if (id == null) {
             throw new RuntimeException("Id не должен быть null");
