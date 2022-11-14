@@ -57,10 +57,6 @@ public class KeyController {
         }
     }
 
-    // TODO: 11.11.2022 Пофиксить проблему с ситуацией когда номер ключа не уникален
-    //  (В таблице keys несколько ключей с одинаковым HEX номером). Походу надо выводить
-    //  через лист, но тогда возможно стоит перенести респонс энтити в сервис https://habr.com/ru/post/675716/
-    //  Или городить куэри. С другой стороны если нам вьюшку надо, то может это всё не имеет смысла
 
     @GetMapping("/key/by-hex")
     @Tag(name = "Ключи")
@@ -71,12 +67,12 @@ public class KeyController {
                             schema = @Schema(implementation = KeyDto.class))
             })
     })
-    public ResponseEntity<List<KeyDto>> getKeyByHex(@RequestParam String hex) throws KeyNumberNotExistException {
-       // try {
+    public ResponseEntity<?> getKeyByHex(@RequestParam String hex) throws KeyNumberNotExistException {
+        try {
             return new ResponseEntity<>(keyService.getByHex(hex), HttpStatus.OK);
-        //} catch (KeyNumberNotExistException e) {
-         //   return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        //}
+        } catch (KeyNumberNotExistException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping("/key")

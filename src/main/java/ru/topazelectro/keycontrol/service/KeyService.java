@@ -53,14 +53,6 @@ public class KeyService extends CommonService<Key, KeyDto, KeyRepository> {
         return super.save(keyDto);
     }
 
-    //    public KeyDto findByHex(String numberHex) {
-//        if (numberHex == null) {
-//            throw new RuntimeException("Номер ключа не должен быть null");
-//        } else {
-//            return toDTO(keyRepository.findByNumberHex(numberHex).orElseThrow(() ->
-//                    new KeyNumberNotExistException(numberHex)));
-//        }
-//    }
     public List<KeyDto> getByHex(String hex) {
         if (hex == null) {
             throw new RuntimeException("Номер ключа не должен быть null");
