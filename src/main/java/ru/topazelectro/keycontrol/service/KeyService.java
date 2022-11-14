@@ -4,10 +4,11 @@ import org.springframework.stereotype.Service;
 import ru.topazelectro.keycontrol.dto.KeyDto;
 import ru.topazelectro.keycontrol.entity.Key;
 import ru.topazelectro.keycontrol.exceptions.KeyTypeNotExistException;
-import ru.topazelectro.keycontrol.exceptions.NumberAlreadyExistException;
 import ru.topazelectro.keycontrol.repository.KeyRepository;
 
 import javax.inject.Inject;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class KeyService extends CommonService<Key, KeyDto, KeyRepository> {
@@ -15,6 +16,8 @@ public class KeyService extends CommonService<Key, KeyDto, KeyRepository> {
 
     @Inject
     KeyTypeService keyTypeService;
+    @Inject
+    KeyRepository keyRepository;
 
     @Inject
     KeyGroupService keyGroupService;
@@ -49,4 +52,25 @@ public class KeyService extends CommonService<Key, KeyDto, KeyRepository> {
         }
         return super.save(keyDto);
     }
+
+    //    public KeyDto findByHex(String numberHex) {
+//        if (numberHex == null) {
+//            throw new RuntimeException("Номер ключа не должен быть null");
+//        } else {
+//            return toDTO(keyRepository.findByNumberHex(numberHex).orElseThrow(() ->
+//                    new KeyNumberNotExistException(numberHex)));
+//        }
+//    }
+    public List<KeyDto> getByHex(String hex) {
+        if (hex == null) {
+            throw new RuntimeException("Номер ключа не должен быть null");
+        } else {
+            return keyRepository
+                    .findByNumberHex(hex)
+                    .stream()
+                    .map(this::toDTO)
+                    .collect(Collectors.toList());
+        }
+    }
 }
+
